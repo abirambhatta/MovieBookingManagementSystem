@@ -165,6 +165,26 @@ public class LoginView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public String getEmailText() {
+        return EmailTextField.getText().trim();
+    }
+
+    public String getPasswordText() {
+        return new String(PasswordPasswordField.getPassword());
+    }
+
+    public javax.swing.JToggleButton getLoginButton() {
+        return LoginButton;
+    }
+
+    public javax.swing.JToggleButton getSignUpButton() {
+        return SignUpButton;
+    }
+
+    public javax.swing.JToggleButton getForgotPasswordButton() {
+        return ForgotPasswordButton;
+    }
+
      private void performLogin() {
         String email = EmailTextField.getText().trim();
         String password = new String(PasswordPasswordField.getPassword());
@@ -205,7 +225,13 @@ public class LoginView extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new LoginView().setVisible(true));
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                LoginView view = new LoginView();
+                new filmvault.controller.LoginController(view);
+                view.setVisible(true);
+            }
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -178,6 +178,30 @@ public class SignUpView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public String getUsernameText() {
+        return UsernameTextField.getText().trim();
+    }
+
+    public String getEmailText() {
+        return EmailTextField1.getText().trim();
+    }
+
+    public String getPasswordText() {
+        return new String(PasswordPasswordField1.getPassword());
+    }
+
+    public String getConfirmPasswordText() {
+        return new String(ConfirmPasswordPasswordField.getPassword());
+    }
+
+    public javax.swing.JToggleButton getSignUpButton() {
+        return SignUpButton1;
+    }
+
+    public javax.swing.JToggleButton getBackButton() {
+        return BackToLoginButton;
+    }
+
     private void performSignUp() {
         String username = UsernameTextField.getText().trim();
         String email = EmailTextField1.getText().trim();
@@ -235,7 +259,11 @@ public class SignUpView extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new SignUpView().setVisible(true));
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new SignUpView().setVisible(true);
+            }
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
