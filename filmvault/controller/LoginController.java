@@ -2,6 +2,7 @@ package filmvault.controller;
 
 import filmvault.view.LoginView;
 import filmvault.view.SignUpView;
+import filmvault.view.ForgotPasswordView;
 import filmvault.model.validation;
 import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
@@ -27,6 +28,12 @@ public class LoginController {
         view.getSignUpButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 openSignUp();
+            }
+        });
+
+        view.getForgotPasswordButton().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                openForgotPassword();
             }
         });
 
@@ -57,5 +64,12 @@ public class LoginController {
         SignUpView signUpView = new SignUpView();
         new SignUpController(signUpView);
         signUpView.setVisible(true);
+    }
+
+    private void openForgotPassword() {
+        view.dispose();
+        ForgotPasswordView forgotView = new ForgotPasswordView();
+        new ForgotPasswordController(forgotView);
+        forgotView.setVisible(true);
     }
 }

@@ -48,6 +48,30 @@ public class validation {
         return true;
     }
     
+    public static boolean validateForgotPassword(String email, String newPass, String confirm, JFrame view) {
+        if (email.isEmpty() || newPass.isEmpty() || confirm.isEmpty()) {
+            JOptionPane.showMessageDialog(view, "All fields are required!", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
+        if (!isValidEmail(email)) {
+            JOptionPane.showMessageDialog(view, "Invalid email format!", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
+        if (newPass.length() <= 6) {
+            JOptionPane.showMessageDialog(view, "Password must be greater than 6 characters!", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
+        if (!newPass.equals(confirm)) {
+            JOptionPane.showMessageDialog(view, "Passwords do not match!", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
+        return true;
+    }
+    
     private static boolean isValidEmail(String email) {
         return email != null && !email.isEmpty() && email.contains("@") && email.contains(".");
     }

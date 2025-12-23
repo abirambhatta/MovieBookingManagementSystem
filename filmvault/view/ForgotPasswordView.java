@@ -168,6 +168,26 @@ public class ForgotPasswordView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public String getEmailText() {
+        return EmailTextField3.getText().trim();
+    }
+
+    public String getNewPasswordText() {
+        return new String(NewPasswordPasswordField.getPassword());
+    }
+
+    public String getConfirmPasswordText() {
+        return new String(ConfirmPasswordPasswordField1.getPassword());
+    }
+
+    public javax.swing.JToggleButton getResetButton() {
+        return RestPasswordButton;
+    }
+
+    public javax.swing.JToggleButton getBackButton() {
+        return BackToLoginButton1;
+    }
+
     private void EmailTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmailTextField3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_EmailTextField3ActionPerformed
