@@ -1,15 +1,21 @@
-package filmvault.controller;
+package HotelBooking.controller;
 
-import filmvault.view.LoginView;
-import filmvault.view.SignUpView;
-import filmvault.view.ForgotPasswordView;
-import filmvault.model.validation;
 import javax.swing.JOptionPane;
+
+import HotelBooking.model.validation;
+import HotelBooking.view.ForgotPasswordView;
+import HotelBooking.view.LoginView;
+import HotelBooking.view.SignUpView;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * LoginController handles login form actions
+ * Manages login button, signup button, and forgot password button
+ */
 public class LoginController {
     private LoginView view;
 
@@ -18,6 +24,7 @@ public class LoginController {
         initController();
     }
 
+    // Initialize button listeners
     private void initController() {
         view.getLoginButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -48,6 +55,7 @@ public class LoginController {
         });
     }
 
+    // Validate and perform login
     private void performLogin() {
         String identifier = view.getEmailText();
         String password = view.getPasswordText();
@@ -59,6 +67,7 @@ public class LoginController {
         JOptionPane.showMessageDialog(view, "Login Successful!\nWelcome " + identifier, "Success", JOptionPane.INFORMATION_MESSAGE);
     }
 
+    // Open signup form
     private void openSignUp() {
         view.dispose();
         SignUpView signUpView = new SignUpView();
@@ -66,6 +75,7 @@ public class LoginController {
         signUpView.setVisible(true);
     }
 
+    // Open forgot password form
     private void openForgotPassword() {
         view.dispose();
         ForgotPasswordView forgotView = new ForgotPasswordView();

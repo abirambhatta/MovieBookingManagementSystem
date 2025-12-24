@@ -2,21 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package filmvault.view;
+package HotelBooking.view;
 
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author lenovo
+ * LoginView - Login form GUI
+ * Displays email, password fields and login/signup buttons
  */
 public class LoginView extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(LoginView.class.getName());
 
-    /**
-     * Creates new form LoginView
-     */
     public LoginView() {
         initComponents();
     }
@@ -165,6 +162,7 @@ public class LoginView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // Getter methods for controller access
     public String getEmailText() {
         return EmailTextField.getText().trim();
     }
@@ -185,10 +183,7 @@ public class LoginView extends javax.swing.JFrame {
         return ForgotPasswordButton;
     }
     
-    /**
-     * @param args the command line arguments
-     */
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel EmailLabel;
     private javax.swing.JTextField EmailTextField;

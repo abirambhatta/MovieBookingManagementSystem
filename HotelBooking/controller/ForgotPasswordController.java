@@ -1,14 +1,20 @@
-package filmvault.controller;
+package HotelBooking.controller;
 
-import filmvault.view.ForgotPasswordView;
-import filmvault.view.LoginView;
-import filmvault.model.validation;
 import javax.swing.JOptionPane;
+
+import HotelBooking.model.validation;
+import HotelBooking.view.ForgotPasswordView;
+import HotelBooking.view.LoginView;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * ForgotPasswordController handles forgot password form actions
+ * Manages reset password button and back to login button
+ */
 public class ForgotPasswordController {
     private ForgotPasswordView view;
 
@@ -17,6 +23,7 @@ public class ForgotPasswordController {
         initController();
     }
 
+    // Initialize button listeners
     private void initController() {
         view.getResetButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -41,6 +48,7 @@ public class ForgotPasswordController {
         });
     }
 
+    // Validate and perform password reset
     private void performReset() {
         String email = view.getEmailText();
         String newPass = view.getNewPasswordText();
@@ -54,6 +62,7 @@ public class ForgotPasswordController {
         backToLogin();
     }
 
+    // Return to login form
     private void backToLogin() {
         view.dispose();
         LoginView loginView = new LoginView();

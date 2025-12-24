@@ -2,19 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package filmvault.view;
+package HotelBooking.view;
 
 /**
- *
- * @author lenovo
+ * ForgotPasswordView - Forgot password form GUI
+ * Displays email, new password fields and reset button
  */
 public class ForgotPasswordView extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ForgotPasswordView.class.getName());
 
-    /**
-     * Creates new form ForgotPasswordView
-     */
     public ForgotPasswordView() {
         initComponents();
     }
@@ -168,6 +165,7 @@ public class ForgotPasswordView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // Getter methods for controller access
     public String getEmailText() {
         return EmailTextField3.getText().trim();
     }
@@ -192,10 +190,7 @@ public class ForgotPasswordView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_EmailTextField3ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton BackToLoginButton1;
     private javax.swing.JLabel ConfirmPasswordField1;

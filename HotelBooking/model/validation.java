@@ -1,10 +1,15 @@
-package filmvault.model;
+package HotelBooking.model;
 
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
 
+/**
+ * Validator class handles all form validation logic
+ * Validates login, signup, and forgot password forms
+ */
 public class validation {
     
+    // Validates login form inputs
     public static boolean validateLogin(String identifier, String password, JFrame view) {
         if (identifier.isEmpty() || password.isEmpty()) {
             JOptionPane.showMessageDialog(view, "Email/Username and Password are required!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -19,6 +24,7 @@ public class validation {
         return true;
     }
     
+    // Validates signup form inputs
     public static boolean validateSignUp(String username, String email, String password, String confirm, JFrame view) {
         if (username.isEmpty() || email.isEmpty() || password.isEmpty() || confirm.isEmpty()) {
             JOptionPane.showMessageDialog(view, "All fields are required!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -48,6 +54,7 @@ public class validation {
         return true;
     }
     
+    // Validates forgot password form inputs
     public static boolean validateForgotPassword(String email, String newPass, String confirm, JFrame view) {
         if (email.isEmpty() || newPass.isEmpty() || confirm.isEmpty()) {
             JOptionPane.showMessageDialog(view, "All fields are required!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -72,10 +79,12 @@ public class validation {
         return true;
     }
     
+    // Checks if email format is valid
     private static boolean isValidEmail(String email) {
         return email != null && !email.isEmpty() && email.contains("@") && email.contains(".");
     }
     
+    // Checks if username contains no numbers
     private static boolean isValidUsername(String username) {
         if (username == null || username.isEmpty()) {
             return false;

@@ -1,14 +1,20 @@
-package filmvault.controller;
+package HotelBooking.controller;
 
-import filmvault.view.LoginView;
-import filmvault.view.SignUpView;
-import filmvault.model.validation;
 import javax.swing.JOptionPane;
+
+import HotelBooking.model.validation;
+import HotelBooking.view.LoginView;
+import HotelBooking.view.SignUpView;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * SignUpController handles signup form actions
+ * Manages signup button and back to login button
+ */
 public class SignUpController {
     private SignUpView view;
 
@@ -17,6 +23,7 @@ public class SignUpController {
         initController();
     }
 
+    // Initialize button listeners
     private void initController() {
         view.getSignUpButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -41,6 +48,7 @@ public class SignUpController {
         });
     }
 
+    // Validate and perform signup
     private void performSignUp() {
         String username = view.getUsernameText();
         String email = view.getEmailText();
@@ -55,6 +63,7 @@ public class SignUpController {
         backToLogin();
     }
 
+    // Return to login form
     private void backToLogin() {
         view.dispose();
         LoginView loginView = new LoginView();

@@ -2,21 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package filmvault.view;
+package HotelBooking.view;
 
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author lenovo
+ * SignUpView - Signup form GUI
+ * Displays username, email, password fields and signup button
  */
 public class SignUpView extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(SignUpView.class.getName());
 
-    /**
-     * Creates new form SignUpView
-     */
     public SignUpView() {
         initComponents();
     }
@@ -178,6 +175,7 @@ public class SignUpView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // Getter methods for controller access
     public String getUsernameText() {
         return UsernameTextField.getText().trim();
     }
@@ -202,10 +200,7 @@ public class SignUpView extends javax.swing.JFrame {
         return BackToLoginButton;
     }
 
-    /**
-     * @param args the command line arguments
-     */
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton BackToLoginButton;
     private javax.swing.JLabel ConfirmPasswordField;
