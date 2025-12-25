@@ -46,6 +46,11 @@ public class validation {
             return false;
         }
         
+        if (!isValidPassword(password)) {
+            JOptionPane.showMessageDialog(view, "Password must contain at least one uppercase letter, one number, and one symbol!", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
         if (!password.equals(confirm)) {
             JOptionPane.showMessageDialog(view, "Passwords do not match!", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
@@ -68,6 +73,11 @@ public class validation {
         
         if (newPass.length() <= 6) {
             JOptionPane.showMessageDialog(view, "Password must be greater than 6 characters!", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
+        if (!isValidPassword(newPass)) {
+            JOptionPane.showMessageDialog(view, "Password must contain at least one uppercase letter, one number, and one symbol!", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         
@@ -95,5 +105,25 @@ public class validation {
             }
         }
         return true;
+    }
+    
+    // Checks if password meets requirements
+    private static boolean isValidPassword(String password) {
+        boolean hasUpper = false;
+        boolean hasDigit = false;
+        boolean hasSymbol = false;
+        
+        for (int i = 0; i < password.length(); i++) {
+            char c = password.charAt(i);
+            if (Character.isUpperCase(c)) {
+                hasUpper = true;
+            } else if (Character.isDigit(c)) {
+                hasDigit = true;
+            } else if (!Character.isLetter(c)) {
+                hasSymbol = true;
+            }
+        }
+        
+        return hasUpper && hasDigit && hasSymbol;
     }
 }
