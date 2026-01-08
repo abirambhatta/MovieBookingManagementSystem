@@ -8,8 +8,13 @@ import MovieBooking.view.AuthenticationView;
  * Starts the application with Authentication screen using CardLayout
  */
 public class Main {
+
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
-        
+
         // Start application with authentication screen
         AuthenticationView authView = new AuthenticationView();
         new AuthenticationController(authView);

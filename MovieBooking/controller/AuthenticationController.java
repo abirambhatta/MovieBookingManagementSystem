@@ -11,7 +11,6 @@ import MovieBooking.model.Admin;
 import MovieBooking.model.User;
 import MovieBooking.view.AuthenticationView;
 import MovieBooking.view.MovieBookingView;
-import MovieBooking.controller.AdminController;
 
 /**
  * AuthenticationController handles all authentication with CardLayout
@@ -20,12 +19,16 @@ import MovieBooking.controller.AdminController;
 public class AuthenticationController {
     private AuthenticationView view;
     private CardLayout cardLayout;
-    
+
     // Card names
     private static final String LOGIN_CARD = "card2";
     private static final String SIGNUP_CARD = "card3";
     private static final String FORGOT_CARD = "card4";
 
+    /**
+     *
+     * @param view
+     */
     public AuthenticationController(AuthenticationView view) {
         this.view = view;
         this.cardLayout = (CardLayout) view.getContentPane().getLayout();
@@ -40,16 +43,24 @@ public class AuthenticationController {
                 performLogin();
             }
         });
-        
+
         view.getSignUpButton4().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 showSignUpCard();
             }
         });
-        
+
         view.getForgotPasswordButton4().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 showForgotCard();
+            }
+        });
+        view.getForgotPasswordButton4().addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                view.getForgotPasswordButton4().setText("<html><u>Forgot Password?</u></html>");
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                view.getForgotPasswordButton4().setText("Forgot Password?");
             }
         });
 
@@ -59,10 +70,18 @@ public class AuthenticationController {
                 performSignUp();
             }
         });
-        
+
         view.getBackToLoginButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 showLoginCard();
+            }
+        });
+        view.getBackToLoginButton().addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                view.getBackToLoginButton().setText("<html><u>Back To Login</u></html>");
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                view.getBackToLoginButton().setText("Back To Login");
             }
         });
 
@@ -72,34 +91,52 @@ public class AuthenticationController {
                 performForgotPassword();
             }
         });
-        
+
         view.getBackToLoginButton1().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 showLoginCard();
             }
         });
-        
+        view.getBackToLoginButton1().addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                view.getBackToLoginButton1().setText("<html><u>Back To Login</u></html>");
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                view.getBackToLoginButton1().setText("Back To Login");
+            }
+        });
+
         setupEnterKeyNavigation();
     }
 
     private void showLoginCard() {
         cardLayout.show(view.getContentPane(), LOGIN_CARD);
-        view.setSize(750, 550);
-        view.setLocationRelativeTo(null);
+        if (view.getExtendedState() != javax.swing.JFrame.MAXIMIZED_BOTH) {
+            view.pack();
+            view.setLocationRelativeTo(null);
+        }
+        view.revalidate();
+        view.repaint();
         clearFields();
     }
 
     private void showSignUpCard() {
         cardLayout.show(view.getContentPane(), SIGNUP_CARD);
-        view.setSize(650, 700);
-        view.setLocationRelativeTo(null);
+        if (view.getExtendedState() != javax.swing.JFrame.MAXIMIZED_BOTH) {
+            view.pack();
+            view.setLocationRelativeTo(null);
+        }
         clearFields();
     }
 
     private void showForgotCard() {
         cardLayout.show(view.getContentPane(), FORGOT_CARD);
-        view.setSize(600, 650);
-        view.setLocationRelativeTo(null);
+        if (view.getExtendedState() != javax.swing.JFrame.MAXIMIZED_BOTH) {
+            view.pack();
+            view.setLocationRelativeTo(null);
+        }
+        view.revalidate();
+        view.repaint();
         clearFields();
     }
 
@@ -113,13 +150,15 @@ public class AuthenticationController {
 
         // Check if admin login
         if (Admin.isAdmin(identifier, password)) {
-            JOptionPane.showMessageDialog(view, "Admin Login Successful!\nWelcome Administrator", "Admin Access", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(view, "Admin Login Successful!\nWelcome Administrator", "Admin Access",
+                    JOptionPane.INFORMATION_MESSAGE);
             view.dispose();
             MovieBookingView movieBookingView = new MovieBookingView();
             new AdminController(movieBookingView);
             movieBookingView.setVisible(true);
         } else if (User.authenticateUser(identifier, password)) {
-            JOptionPane.showMessageDialog(view, "User Login Successful!\nWelcome " + identifier, "Success", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(view, "User Login Successful!\nWelcome " + identifier, "Success",
+                    JOptionPane.INFORMATION_MESSAGE);
             // TODO: Open user dashboard
         } else {
             JOptionPane.showMessageDialog(view, "Invalid credentials!", "Login Failed", JOptionPane.ERROR_MESSAGE);
@@ -138,7 +177,8 @@ public class AuthenticationController {
 
         // Check if user already exists
         if (User.userExists(username, email)) {
-            JOptionPane.showMessageDialog(view, "Username or Email already exists!", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(view, "Username or Email already exists!", "Error",
+                    JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -147,7 +187,8 @@ public class AuthenticationController {
             JOptionPane.showMessageDialog(view, "Registration successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
             showLoginCard();
         } else {
-            JOptionPane.showMessageDialog(view, "Registration failed! Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(view, "Registration failed! Please try again.", "Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -162,7 +203,8 @@ public class AuthenticationController {
 
         // Check if user exists and update password
         if (User.updatePassword(email, newPass)) {
-            JOptionPane.showMessageDialog(view, "Password reset successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(view, "Password reset successful!", "Success",
+                    JOptionPane.INFORMATION_MESSAGE);
             showLoginCard();
         } else {
             JOptionPane.showMessageDialog(view, "Email not found!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -173,21 +215,20 @@ public class AuthenticationController {
         // Clear login fields
         view.getEmailTextField4().setText("");
         view.getPasswordPasswordField4().setText("");
-        
+
         // Clear signup fields
         view.getUsernameTextField().setText("");
         view.getEmailTextField5().setText("");
         view.getPasswordPasswordField5().setText("");
         view.getConfirmPasswordPasswordField().setText("");
-        
+
         // Clear forgot password fields
         view.getEmailTextField6().setText("");
         view.getNewPasswordPasswordField().setText("");
         view.getConfirmPasswordPasswordField1().setText("");
     }
-    
+
     private void setupEnterKeyNavigation() {
-        // Login card - Enter key navigation
         view.getEmailTextField4().addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
@@ -195,7 +236,7 @@ public class AuthenticationController {
                 }
             }
         });
-        
+
         view.getPasswordPasswordField4().addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
@@ -203,7 +244,7 @@ public class AuthenticationController {
                 }
             }
         });
-        
+
         // SignUp card - Enter key navigation
         view.getUsernameTextField().addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -212,7 +253,7 @@ public class AuthenticationController {
                 }
             }
         });
-        
+
         view.getEmailTextField5().addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
@@ -220,7 +261,7 @@ public class AuthenticationController {
                 }
             }
         });
-        
+
         view.getPasswordPasswordField5().addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
@@ -228,7 +269,7 @@ public class AuthenticationController {
                 }
             }
         });
-        
+
         view.getConfirmPasswordPasswordField().addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
@@ -236,7 +277,7 @@ public class AuthenticationController {
                 }
             }
         });
-        
+
         // Forgot Password card - Enter key navigation
         view.getEmailTextField6().addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -245,7 +286,7 @@ public class AuthenticationController {
                 }
             }
         });
-        
+
         view.getNewPasswordPasswordField().addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
@@ -253,7 +294,7 @@ public class AuthenticationController {
                 }
             }
         });
-        
+
         view.getConfirmPasswordPasswordField1().addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {

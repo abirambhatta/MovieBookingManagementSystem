@@ -14,6 +14,12 @@ public class User {
     
     private static final String USER_FILE = "src/MovieBooking/users.txt";
     
+    /**
+     *
+     * @param username
+     * @param email
+     * @param password
+     */
     public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
@@ -21,6 +27,14 @@ public class User {
     }
     
     // Save user to file
+
+    /**
+     *
+     * @param username
+     * @param email
+     * @param password
+     * @return
+     */
     public static boolean saveUser(String username, String email, String password) {
         try (FileWriter writer = new FileWriter(USER_FILE, true)) {
             writer.write(username + "," + email + "," + password + "\n");
@@ -31,6 +45,13 @@ public class User {
     }
     
     // Check if user exists and password matches
+
+    /**
+     *
+     * @param identifier
+     * @param password
+     * @return
+     */
     public static boolean authenticateUser(String identifier, String password) {
         try (BufferedReader reader = new BufferedReader(new FileReader(USER_FILE))) {
             String line;
@@ -56,6 +77,13 @@ public class User {
     }
     
     // Update user password in file
+
+    /**
+     *
+     * @param email
+     * @param newPassword
+     * @return
+     */
     public static boolean updatePassword(String email, String newPassword) {
         List<String> users = new ArrayList<>();
         boolean userFound = false;
@@ -102,6 +130,13 @@ public class User {
     }
     
     // Check if username or email already exists
+
+    /**
+     *
+     * @param username
+     * @param email
+     * @return
+     */
     public static boolean userExists(String username, String email) {
         try (BufferedReader reader = new BufferedReader(new FileReader(USER_FILE))) {
             String line;
