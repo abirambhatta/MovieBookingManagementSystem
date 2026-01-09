@@ -5,8 +5,12 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import MovieBooking.model.Movie;
 import MovieBooking.view.MovieBookingView;
@@ -49,6 +53,7 @@ public class AdminController {
         view.getMovieTable().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         view.getMovieTable().setRowSelectionAllowed(true);
         view.getMovieTable().setColumnSelectionAllowed(false);
+        view.getMovieTable().setDefaultEditor(Object.class, null);
     }
 
     private void initController() {
@@ -166,22 +171,10 @@ public class AdminController {
         try (BufferedReader reader = new BufferedReader(new FileReader(MOVIE_FILE))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                int firstComma = line.indexOf(',');
-                int secondComma = line.indexOf(',', firstComma + 1);
-                int thirdComma = line.indexOf(',', secondComma + 1);
-                int fourthComma = line.indexOf(',', thirdComma + 1);
-                int fifthComma = line.indexOf(',', fourthComma + 1);
-
-                if (firstComma != -1 && secondComma != -1 && thirdComma != -1 &&
-                        fourthComma != -1 && fifthComma != -1) {
-                    String name = line.substring(0, firstComma);
-                    String director = line.substring(firstComma + 1, secondComma);
-                    String genre = line.substring(secondComma + 1, thirdComma);
-                    String language = line.substring(thirdComma + 1, fourthComma);
-                    String duration = line.substring(fourthComma + 1, fifthComma);
-                    String rating = line.substring(fifthComma + 1);
-
-                    movieList.add(new Movie(name, director, genre, language, duration, rating));
+                String[] parts = line.split(",");
+                if (parts.length >= 6) {
+                    String imagePath = parts.length > 6 ? parts[6] : "";
+                    movieList.add(new Movie(parts[0], parts[1], parts[2], parts[3], parts[4], parts[5], imagePath));
                 }
             }
         } catch (IOException e) {
@@ -194,7 +187,7 @@ public class AdminController {
             for (Movie movie : movieList) {
                 writer.write(movie.getName() + "," + movie.getDirector() + "," +
                         movie.getGenre() + "," + movie.getLanguage() + "," +
-                        movie.getDuration() + "," + movie.getRating() + "\n");
+                        movie.getDuration() + "," + movie.getRating() + "," + movie.getImagePath() + "\n");
             }
         } catch (IOException e) {
             JOptionPane.showMessageDialog(view, "Error saving movies to file!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -219,12 +212,134 @@ public class AdminController {
     }
 
     private void addMovie() {
-        DefaultTableModel model = (DefaultTableModel) view.getMovieTable().getModel();
-        model.addRow(new Object[] { "", "", "", "", "", "" });
-        int newRow = model.getRowCount() - 1;
-        view.getMovieTable().setRowSelectionInterval(newRow, newRow);
-        view.getMovieTable().editCellAt(newRow, 0);
-        view.getMovieTable().getEditorComponent().requestFocus();
+        view.getMovieNameField().setText("");
+        view.getDirectorField().setText("");
+        view.getGenreCombo().setSelectedItem(null);
+        view.getLanguageCombo().setSelectedItem(null);
+        view.getDurationField().setText("");
+        view.getRatingCombo().setSelectedItem(null);
+        view.getImageLabel().setText("No Image Selected");
+        view.getFileChooser().setSelectedFile(null);
+        view.getMovieDialog().setSize(700, 500);
+        CardLayout cl = (CardLayout) view.getMovieDialog().getContentPane().getLayout();
+        cl.show(view.getMovieDialog().getContentPane(), "card2");
+        
+        setupDialogListeners();
+        
+        view.getMovieDialog().setLocationRelativeTo(view);
+        view.getMovieDialog().setVisible(true);
+    }
+    
+    private void setupDialogListeners() {
+        for (ActionListener al : view.getBrowseButton().getActionListeners()) {
+            view.getBrowseButton().removeActionListener(al);
+        }
+        for (ActionListener al : view.getSaveButton().getActionListeners()) {
+            view.getSaveButton().removeActionListener(al);
+        }
+        for (ActionListener al : view.getCancelButton().getActionListeners()) {
+            view.getCancelButton().removeActionListener(al);
+        }
+        for (ActionListener al : view.getFileChooser().getActionListeners()) {
+            view.getFileChooser().removeActionListener(al);
+        }
+        
+        addEnterKeyListeners();
+        
+        view.getBrowseButton().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                CardLayout cl = (CardLayout) view.getMovieDialog().getContentPane().getLayout();
+                cl.show(view.getMovieDialog().getContentPane(), "card3");
+            }
+        });
+        
+        view.getFileChooser().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (e.getActionCommand().equals(javax.swing.JFileChooser.APPROVE_SELECTION)) {
+                    String fileName = view.getFileChooser().getSelectedFile().getName();
+                    view.getImageLabel().setText(fileName);
+                    CardLayout cl = (CardLayout) view.getMovieDialog().getContentPane().getLayout();
+                    cl.show(view.getMovieDialog().getContentPane(), "card2");
+                } else if (e.getActionCommand().equals(javax.swing.JFileChooser.CANCEL_SELECTION)) {
+                    CardLayout cl = (CardLayout) view.getMovieDialog().getContentPane().getLayout();
+                    cl.show(view.getMovieDialog().getContentPane(), "card2");
+                }
+            }
+        });
+        
+        view.getSaveButton().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (validateForm()) {
+                    String imagePath = copyImageToPosters(view.getFileChooser().getSelectedFile() != null ? view.getFileChooser().getSelectedFile().getAbsolutePath() : "");
+                    Movie movie = new Movie(
+                        view.getMovieNameField().getText().trim(),
+                        view.getDirectorField().getText().trim(),
+                        (String) view.getGenreCombo().getSelectedItem(),
+                        (String) view.getLanguageCombo().getSelectedItem(),
+                        view.getDurationField().getText().trim(),
+                        (String) view.getRatingCombo().getSelectedItem(),
+                        imagePath
+                    );
+                    movieList.add(movie);
+                    saveMoviesToFile();
+                    loadMovieTable();
+                    view.getMovieDialog().dispose();
+                    JOptionPane.showMessageDialog(view, "Movie added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        });
+        
+        view.getCancelButton().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                view.getMovieDialog().dispose();
+            }
+        });
+    }
+    
+    private boolean validateForm() {
+        if (view.getMovieNameField().getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(view, "Movie name is required!", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (view.getDirectorField().getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(view, "Director is required!", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (view.getGenreCombo().getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(view, "Genre is required!", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (view.getLanguageCombo().getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(view, "Language is required!", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (view.getDurationField().getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(view, "Duration is required!", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (view.getRatingCombo().getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(view, "Rating is required!", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+    
+    private String copyImageToPosters(String sourcePath) {
+        if (sourcePath.isEmpty()) {
+            return "";
+        }
+        try {
+            File sourceFile = new File(sourcePath);
+            String fileName = sourceFile.getName();
+            String destDir = "src/MovieBooking/posters";
+            new File(destDir).mkdirs();
+            String destPath = destDir + "/" + fileName;
+            Files.copy(Paths.get(sourcePath), Paths.get(destPath), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+            return destPath;
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(view, "Error copying image file!", "Error", JOptionPane.ERROR_MESSAGE);
+            return "";
+        }
     }
 
     private void deleteMovie() {
@@ -248,28 +363,157 @@ public class AdminController {
     }
 
     private void updateMovie() {
-        DefaultTableModel model = (DefaultTableModel) view.getMovieTable().getModel();
-        movieList.clear();
-
-        for (int i = 0; i < model.getRowCount(); i++) {
-            String name = String.valueOf(model.getValueAt(i, 0)).trim();
-            String director = String.valueOf(model.getValueAt(i, 1)).trim();
-            String genre = String.valueOf(model.getValueAt(i, 2)).trim();
-            String language = String.valueOf(model.getValueAt(i, 3)).trim();
-            String duration = String.valueOf(model.getValueAt(i, 4)).trim();
-            String rating = String.valueOf(model.getValueAt(i, 5)).trim();
-
-            if (name.isEmpty() || director.isEmpty() || genre.isEmpty() ||
-                    language.isEmpty() || duration.isEmpty() || rating.isEmpty()) {
-                JOptionPane.showMessageDialog(view, "Row " + (i + 1) + " has empty fields!", "Error",
-                        JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            movieList.add(new Movie(name, director, genre, language, duration, rating));
+        int selectedRow = view.getMovieTable().getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(view, "Please select a movie to update!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
 
-        saveMoviesToFile();
-        JOptionPane.showMessageDialog(view, "Movies updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+        Movie selectedMovie = movieList.get(selectedRow);
+        
+        view.getMovieNameField().setText(selectedMovie.getName());
+        view.getDirectorField().setText(selectedMovie.getDirector());
+        view.getGenreCombo().setSelectedItem(selectedMovie.getGenre());
+        view.getLanguageCombo().setSelectedItem(selectedMovie.getLanguage());
+        view.getDurationField().setText(selectedMovie.getDuration());
+        view.getRatingCombo().setSelectedItem(selectedMovie.getRating());
+        view.getImageLabel().setText(selectedMovie.getImagePath().isEmpty() ? "No Image Selected" : new File(selectedMovie.getImagePath()).getName());
+        view.getFileChooser().setSelectedFile(null);
+        view.getMovieDialog().setSize(700, 500);
+        CardLayout cl = (CardLayout) view.getMovieDialog().getContentPane().getLayout();
+        cl.show(view.getMovieDialog().getContentPane(), "card2");
+        
+        setupUpdateDialogListeners(selectedMovie);
+        
+        view.getMovieDialog().setLocationRelativeTo(view);
+        view.getMovieDialog().setVisible(true);
+    }
+    
+    private void setupUpdateDialogListeners(final Movie selectedMovie) {
+        for (ActionListener al : view.getBrowseButton().getActionListeners()) {
+            view.getBrowseButton().removeActionListener(al);
+        }
+        for (ActionListener al : view.getSaveButton().getActionListeners()) {
+            view.getSaveButton().removeActionListener(al);
+        }
+        for (ActionListener al : view.getCancelButton().getActionListeners()) {
+            view.getCancelButton().removeActionListener(al);
+        }
+        for (ActionListener al : view.getFileChooser().getActionListeners()) {
+            view.getFileChooser().removeActionListener(al);
+        }
+        
+        addEnterKeyListeners();
+        
+        view.getBrowseButton().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                CardLayout cl = (CardLayout) view.getMovieDialog().getContentPane().getLayout();
+                cl.show(view.getMovieDialog().getContentPane(), "card3");
+            }
+        });
+        
+        view.getFileChooser().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (e.getActionCommand().equals(javax.swing.JFileChooser.APPROVE_SELECTION)) {
+                    String fileName = view.getFileChooser().getSelectedFile().getName();
+                    view.getImageLabel().setText(fileName);
+                    CardLayout cl = (CardLayout) view.getMovieDialog().getContentPane().getLayout();
+                    cl.show(view.getMovieDialog().getContentPane(), "card2");
+                } else if (e.getActionCommand().equals(javax.swing.JFileChooser.CANCEL_SELECTION)) {
+                    CardLayout cl = (CardLayout) view.getMovieDialog().getContentPane().getLayout();
+                    cl.show(view.getMovieDialog().getContentPane(), "card2");
+                }
+            }
+        });
+        
+        view.getSaveButton().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (validateForm()) {
+                    String imagePath = selectedMovie.getImagePath();
+                    if (view.getFileChooser().getSelectedFile() != null) {
+                        imagePath = copyImageToPosters(view.getFileChooser().getSelectedFile().getAbsolutePath());
+                    }
+                    selectedMovie.setName(view.getMovieNameField().getText().trim());
+                    selectedMovie.setDirector(view.getDirectorField().getText().trim());
+                    selectedMovie.setGenre((String) view.getGenreCombo().getSelectedItem());
+                    selectedMovie.setLanguage((String) view.getLanguageCombo().getSelectedItem());
+                    selectedMovie.setDuration(view.getDurationField().getText().trim());
+                    selectedMovie.setRating((String) view.getRatingCombo().getSelectedItem());
+                    selectedMovie.setImagePath(imagePath);
+                    saveMoviesToFile();
+                    loadMovieTable();
+                    view.getMovieDialog().dispose();
+                    JOptionPane.showMessageDialog(view, "Movie updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        });
+        
+        view.getCancelButton().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                view.getMovieDialog().dispose();
+            }
+        });
+    }
+    
+    private void addEnterKeyListeners() {
+        view.getMovieNameField().addKeyListener(new KeyListener() {
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    view.getDirectorField().requestFocus();
+                }
+            }
+            public void keyReleased(KeyEvent e) {}
+            public void keyTyped(KeyEvent e) {}
+        });
+        
+        view.getDirectorField().addKeyListener(new KeyListener() {
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    view.getGenreCombo().requestFocus();
+                }
+            }
+            public void keyReleased(KeyEvent e) {}
+            public void keyTyped(KeyEvent e) {}
+        });
+        
+        view.getGenreCombo().addKeyListener(new KeyListener() {
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    view.getLanguageCombo().requestFocus();
+                }
+            }
+            public void keyReleased(KeyEvent e) {}
+            public void keyTyped(KeyEvent e) {}
+        });
+        
+        view.getLanguageCombo().addKeyListener(new KeyListener() {
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    view.getDurationField().requestFocus();
+                }
+            }
+            public void keyReleased(KeyEvent e) {}
+            public void keyTyped(KeyEvent e) {}
+        });
+        
+        view.getDurationField().addKeyListener(new KeyListener() {
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    view.getRatingCombo().requestFocus();
+                }
+            }
+            public void keyReleased(KeyEvent e) {}
+            public void keyTyped(KeyEvent e) {}
+        });
+        
+        view.getRatingCombo().addKeyListener(new KeyListener() {
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    view.getBrowseButton().requestFocus();
+                }
+            }
+            public void keyReleased(KeyEvent e) {}
+            public void keyTyped(KeyEvent e) {}
+        });
     }
 }

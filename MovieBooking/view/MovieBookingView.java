@@ -12,6 +12,7 @@ public class MovieBookingView extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger
             .getLogger(MovieBookingView.class.getName());
+    private String currentPage = "home";
 
     /**
      * Creates new form MovieBookingView
@@ -22,6 +23,20 @@ public class MovieBookingView extends javax.swing.JFrame {
         cl.show(getContentPane(), "card2");
         java.awt.CardLayout dashboardCl = (java.awt.CardLayout) AdminDashboards.getLayout();
         dashboardCl.show(AdminDashboards, "card2");
+        disableButtonFocus();
+    }
+
+    private void disableButtonFocus() {
+        HomeButton.setFocusPainted(false);
+        MoviesButton.setFocusPainted(false);
+        UsersButton.setFocusPainted(false);
+        jButton5.setFocusPainted(false);
+        AddButton.setFocusPainted(false);
+        UpdateButton.setFocusPainted(false);
+        DeleteButton.setFocusPainted(false);
+        jButton1.setFocusPainted(false);
+        jButton2.setFocusPainted(false);
+        jButton3.setFocusPainted(false);
     }
 
     /**
@@ -35,7 +50,27 @@ public class MovieBookingView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        UserpPannel = new javax.swing.JPanel();
+        jDialog1 = new javax.swing.JDialog();
+        Add_UpdateMovieForm = new javax.swing.JPanel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel32 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jTextField3 = new javax.swing.JTextField();
+        jComboBox3 = new javax.swing.JComboBox<>();
+        ImagePosterChooser = new javax.swing.JPanel();
+        jFileChooser2 = new javax.swing.JFileChooser();
         AdminPannel = new javax.swing.JPanel();
         NavigationBarWithButton = new javax.swing.JPanel();
         AdminDashboards = new javax.swing.JPanel();
@@ -54,23 +89,182 @@ public class MovieBookingView extends javax.swing.JFrame {
         UsersButton = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        UserpPannel = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+
+        jDialog1.getContentPane().setLayout(new java.awt.CardLayout());
+
+        Add_UpdateMovieForm.setBackground(new java.awt.Color(204, 204, 204));
+
+        jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel25.setText("Movie Name:");
+
+        jLabel26.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel26.setText("Director:");
+
+        jLabel27.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel27.setText("Genre");
+        jLabel27.setToolTipText("");
+
+        jLabel28.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel28.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel28.setText("Language:");
+
+        jLabel29.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel29.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel29.setText("Duration (min):");
+
+        jLabel30.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel30.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel30.setText("Rating:");
+
+        jLabel31.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel31.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel31.setText("Poster Image:");
+
+        jButton1.setBackground(new java.awt.Color(51, 51, 51));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Browse");
+
+        jLabel32.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel32.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel32.setText("No Image Selected");
+
+        jButton2.setBackground(new java.awt.Color(212, 237, 218));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(0, 0, 0));
+        jButton2.setText("Save");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setBackground(new java.awt.Color(255, 102, 102));
+        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setText("Cancel");
+
+        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jTextField2.setBackground(new java.awt.Color(255, 255, 255));
+        jTextField2.setForeground(new java.awt.Color(0, 0, 0));
+
+        jComboBox1.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBox1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jComboBox1.setForeground(new java.awt.Color(0, 0, 0));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Action", "Adventure", "Comedy", "Drama", "Fantasy", "Horror", "Romance", "Science Fiction", "Thriller", "Animation" }));
+
+        jComboBox2.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBox2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jComboBox2.setForeground(new java.awt.Color(0, 0, 0));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nepali", "English", "Hindi", " " }));
+
+        jTextField3.setBackground(new java.awt.Color(255, 255, 255));
+        jTextField3.setForeground(new java.awt.Color(0, 0, 0));
+
+        jComboBox3.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBox3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jComboBox3.setForeground(new java.awt.Color(0, 0, 0));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "G", "PG", "PG-13", "R", "NC-17" }));
+
+        javax.swing.GroupLayout Add_UpdateMovieFormLayout = new javax.swing.GroupLayout(Add_UpdateMovieForm);
+        Add_UpdateMovieForm.setLayout(Add_UpdateMovieFormLayout);
+        Add_UpdateMovieFormLayout.setHorizontalGroup(
+            Add_UpdateMovieFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Add_UpdateMovieFormLayout.createSequentialGroup()
+                .addGap(83, 83, 83)
+                .addGroup(Add_UpdateMovieFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel30, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(Add_UpdateMovieFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(Add_UpdateMovieFormLayout.createSequentialGroup()
+                        .addGroup(Add_UpdateMovieFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(133, Short.MAX_VALUE))
+        );
+        Add_UpdateMovieFormLayout.setVerticalGroup(
+            Add_UpdateMovieFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Add_UpdateMovieFormLayout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addGroup(Add_UpdateMovieFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel25)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(Add_UpdateMovieFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel26)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(Add_UpdateMovieFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel27)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(Add_UpdateMovieFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel28)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(Add_UpdateMovieFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel29)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(Add_UpdateMovieFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel30)
+                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(Add_UpdateMovieFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel31)
+                    .addComponent(jButton1)
+                    .addComponent(jLabel32))
+                .addGap(27, 27, 27)
+                .addGroup(Add_UpdateMovieFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
+                .addGap(38, 38, 38))
+        );
+
+        jDialog1.getContentPane().add(Add_UpdateMovieForm, "card2");
+
+        javax.swing.GroupLayout ImagePosterChooserLayout = new javax.swing.GroupLayout(ImagePosterChooser);
+        ImagePosterChooser.setLayout(ImagePosterChooserLayout);
+        ImagePosterChooserLayout.setHorizontalGroup(
+            ImagePosterChooserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jFileChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE)
+        );
+        ImagePosterChooserLayout.setVerticalGroup(
+            ImagePosterChooserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jFileChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
+        );
+
+        jDialog1.getContentPane().add(ImagePosterChooser, "card3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         getContentPane().setLayout(new java.awt.CardLayout());
-
-        javax.swing.GroupLayout UserpPannelLayout = new javax.swing.GroupLayout(UserpPannel);
-        UserpPannel.setLayout(UserpPannelLayout);
-        UserpPannelLayout.setHorizontalGroup(
-            UserpPannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 894, Short.MAX_VALUE)
-        );
-        UserpPannelLayout.setVerticalGroup(
-            UserpPannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 435, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(UserpPannel, "card3");
 
         NavigationBarWithButton.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -105,7 +299,7 @@ public class MovieBookingView extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -161,13 +355,10 @@ public class MovieBookingView extends javax.swing.JFrame {
         AdminMoviesLayout.setVerticalGroup(
             AdminMoviesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AdminMoviesLayout.createSequentialGroup()
-                .addGroup(AdminMoviesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(AdminMoviesLayout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(AddButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminMoviesLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(36, 36, 36)
+                .addGroup(AdminMoviesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AddButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -248,9 +439,8 @@ public class MovieBookingView extends javax.swing.JFrame {
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(NavigationBarWithButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(HomeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NavigationBarWithButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(MoviesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(UsersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(MoviesButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(UsersButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(AdminDashboards, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -262,16 +452,16 @@ public class MovieBookingView extends javax.swing.JFrame {
                 .addGroup(NavigationBarWithButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(LogoIconAdmin))
-                .addGap(38, 38, 38)
+                .addGap(66, 66, 66)
                 .addComponent(HomeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addGap(18, 18, 18)
                 .addComponent(MoviesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addGap(18, 18, 18)
                 .addComponent(UsersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
+                .addGap(43, 43, 43)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(AdminDashboards, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)
+            .addComponent(AdminDashboards, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout AdminPannelLayout = new javax.swing.GroupLayout(AdminPannel);
@@ -287,66 +477,125 @@ public class MovieBookingView extends javax.swing.JFrame {
 
         getContentPane().add(AdminPannel, "card2");
 
+        UserpPannel.setLayout(new java.awt.CardLayout());
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGap(0, 124, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        UserpPannel.add(jPanel1, "card2");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 894, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 435, Short.MAX_VALUE)
+        );
+
+        UserpPannel.add(jPanel2, "card3");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 894, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 435, Short.MAX_VALUE)
+        );
+
+        UserpPannel.add(jPanel3, "card4");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 894, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 435, Short.MAX_VALUE)
+        );
+
+        UserpPannel.add(jPanel4, "card5");
+
+        getContentPane().add(UserpPannel, "card3");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     private void HomeButtonMouseExited(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_HomeButtonMouseExited
-        if (!isCurrentPage("home")) {
+        if (!currentPage.equals("home")) {
             HomeButton.setText("Home");
         }
     }// GEN-LAST:event_HomeButtonMouseExited
 
     private void HomeButtonMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_HomeButtonMouseEntered
-        if (!HomeButton.getText().contains("underline")) {
-            HomeButton.setText(
-                    "<html><u>Home</u></html>");
+        if (!currentPage.equals("home")) {
+            HomeButton.setText("<html><u>Home</u></html>");
         }
     }// GEN-LAST:event_HomeButtonMouseEntered
 
-    /**
-     * Helper method to check if a page is currently active
-     *
-     * @param page The page name to check ("home", "movies", "users")
-     * @return true if the specified page is currently active
-     */
-    private boolean isCurrentPage(String page) {
-        // Check if this is the current active page by checking controller state
-        return (page.equals("home") && HomeButton.getText().contains("underline")
-                && !MoviesButton.getText().contains("underline") && !UsersButton.getText().contains("underline")) ||
-                (page.equals("movies") && MoviesButton.getText().contains("underline")
-                        && !HomeButton.getText().contains("underline") && !UsersButton.getText().contains("underline"))
-                ||
-                (page.equals("users") && UsersButton.getText().contains("underline")
-                        && !HomeButton.getText().contains("underline")
-                        && !MoviesButton.getText().contains("underline"));
-    }
-
-    // Movies button mouse hover handlers
     private void MoviesButtonMouseEntered(java.awt.event.MouseEvent evt) {
-        if (!MoviesButton.getText().contains("underline")) {
+        if (!currentPage.equals("movies")) {
             MoviesButton.setText("<html><u>Movies</u></html>");
         }
     }
 
     private void MoviesButtonMouseExited(java.awt.event.MouseEvent evt) {
-        // Remove underline effect only if not the current active page
-        if (!isCurrentPage("movies")) {
+        if (!currentPage.equals("movies")) {
             MoviesButton.setText("Movies");
         }
     }
 
-    // Users button mouse hover handlers
     private void UsersButtonMouseEntered(java.awt.event.MouseEvent evt) {
-        if (!UsersButton.getText().contains("underline")) {
+        if (!currentPage.equals("users")) {
             UsersButton.setText("<html><u>Users</u></html>");
         }
     }
 
     private void UsersButtonMouseExited(java.awt.event.MouseEvent evt) {
-        // Remove underline effect only if not the current active page
-        if (!isCurrentPage("users")) {
+        if (!currentPage.equals("users")) {
             UsersButton.setText("Users");
         }
+    }
+
+    public void setCurrentPage(String page) {
+        currentPage = page;
+        HomeButton.setText(page.equals("home") ? "<html><u>Home</u></html>" : "Home");
+        MoviesButton.setText(page.equals("movies") ? "<html><u>Movies</u></html>" : "Movies");
+        UsersButton.setText(page.equals("users") ? "<html><u>Users</u></html>" : "Users");
     }
 
 
@@ -430,8 +679,57 @@ public class MovieBookingView extends javax.swing.JFrame {
         return DeleteButton;
     }
 
+    public javax.swing.JDialog getMovieDialog() {
+        return jDialog1;
+    }
+
+    public javax.swing.JTextField getMovieNameField() {
+        return jTextField1;
+    }
+
+    public javax.swing.JTextField getDirectorField() {
+        return jTextField2;
+    }
+
+    public javax.swing.JComboBox<String> getGenreCombo() {
+        return jComboBox1;
+    }
+
+    public javax.swing.JComboBox<String> getLanguageCombo() {
+        return jComboBox2;
+    }
+
+    public javax.swing.JTextField getDurationField() {
+        return jTextField3;
+    }
+
+    public javax.swing.JComboBox<String> getRatingCombo() {
+        return jComboBox3;
+    }
+
+    public javax.swing.JButton getBrowseButton() {
+        return jButton1;
+    }
+
+    public javax.swing.JButton getSaveButton() {
+        return jButton2;
+    }
+
+    public javax.swing.JButton getCancelButton() {
+        return jButton3;
+    }
+
+    public javax.swing.JLabel getImageLabel() {
+        return jLabel32;
+    }
+
+    public javax.swing.JFileChooser getFileChooser() {
+        return jFileChooser2;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddButton;
+    private javax.swing.JPanel Add_UpdateMovieForm;
     private javax.swing.JPanel AdminDashboards;
     private javax.swing.JPanel AdminHome;
     private javax.swing.JPanel AdminMovies;
@@ -439,16 +737,52 @@ public class MovieBookingView extends javax.swing.JFrame {
     private javax.swing.JPanel AdminUser;
     private javax.swing.JButton DeleteButton;
     private javax.swing.JButton HomeButton;
+    private javax.swing.JPanel ImagePosterChooser;
     private javax.swing.JLabel LogoIconAdmin;
     private javax.swing.JButton MoviesButton;
     private javax.swing.JPanel NavigationBarWithButton;
     private javax.swing.JButton UpdateButton;
     private javax.swing.JPanel UserpPannel;
     private javax.swing.JButton UsersButton;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JDialog jDialog1;
+    private javax.swing.JFileChooser jFileChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable2;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
+
+    public void showFormPanel() {
+        java.awt.CardLayout cl = (java.awt.CardLayout) jDialog1.getContentPane().getLayout();
+        cl.show(jDialog1.getContentPane(), "form");
+    }
+
+    public void showChooserPanel() {
+        java.awt.CardLayout cl = (java.awt.CardLayout) jDialog1.getContentPane().getLayout();
+        cl.show(jDialog1.getContentPane(), "chooser");
+    }
 }

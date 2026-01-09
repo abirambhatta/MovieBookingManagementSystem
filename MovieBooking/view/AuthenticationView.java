@@ -19,6 +19,17 @@ public class AuthenticationView extends javax.swing.JFrame {
     public AuthenticationView() {
         initComponents();
         setResizable(true);
+        disableButtonFocus();
+    }
+
+    private void disableButtonFocus() {
+        LoginButton.setFocusPainted(false);
+        SignUpButton.setFocusPainted(false);
+        Signupbutton1.setFocusPainted(false);
+        ResetPasswordButton.setFocusPainted(false);
+        BackToLoginButton.setFocusPainted(false);
+        BackToLoginButton1.setFocusPainted(false);
+        ForgotPasswordButton4.setFocusPainted(false);
     }
 
     /**
