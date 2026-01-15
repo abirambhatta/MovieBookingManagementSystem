@@ -698,26 +698,49 @@ public class AdminController {
      * 
      * @param criteria "Name", "Date", or "Booking"
      */
+    /**
+     * Sorts the cached user list by the specified criteria using a manual
+     * Selection Sort algorithm for coursework demonstration.
+     * 
+     * @param criteria "Name", "Date", or "Booking"
+     */
     private void handleSortUser(String criteria) {
         List<User> sortedList = new ArrayList<>(allUsers);
+        int n = sortedList.size();
 
-        switch (criteria) {
-            case "Name":
-                Collections.sort(sortedList, Comparator.comparing(User::getUsername, String.CASE_INSENSITIVE_ORDER));
-                break;
-            case "Date":
-                Collections.sort(sortedList, Comparator.comparing(User::getRegistrationDate).reversed());
-                break;
-            case "Booking":
-                // Retrieve current booking counts for accurate sorting
-                Map<String, Integer> counts = Ticket.getBookingCounts();
-                Collections.sort(sortedList, (u1, u2) -> {
+        // --- Manual Selection Sort Implementation ---
+        for (int i = 0; i < n - 1; i++) {
+            int selectedIdx = i;
+            for (int j = i + 1; j < n; j++) {
+                User u1 = sortedList.get(j);
+                User u2 = sortedList.get(selectedIdx);
+                boolean shouldSwap = false;
+
+                if (criteria.equals("Name")) {
+                    // Ascending alphabetical order
+                    shouldSwap = u1.getUsername().compareToIgnoreCase(u2.getUsername()) < 0;
+                } else if (criteria.equals("Date")) {
+                    // Descending date (Newest first)
+                    shouldSwap = u1.getRegistrationDate().isAfter(u2.getRegistrationDate());
+                } else if (criteria.equals("Booking")) {
+                    // Descending booking count (Highest first)
+                    Map<String, Integer> counts = Ticket.getBookingCounts();
                     int c1 = counts.getOrDefault(u1.getUsername(), 0);
                     int c2 = counts.getOrDefault(u2.getUsername(), 0);
-                    return Integer.compare(c2, c1); // Sort Descending (Highest first)
-                });
-                break;
+                    shouldSwap = c1 > c2;
+                }
+
+                if (shouldSwap) {
+                    selectedIdx = j;
+                }
+            }
+            // Swap the found minimum (or maximum) element with the first element
+            User temp = sortedList.get(selectedIdx);
+            sortedList.set(selectedIdx, sortedList.get(i));
+            sortedList.set(i, temp);
         }
+        // --- End of Manual Sort ---
+
         displayUserTable(sortedList);
     }
 

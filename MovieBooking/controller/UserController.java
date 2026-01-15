@@ -947,12 +947,29 @@ public class UserController {
 
     private boolean isSortNameAsc = true;
 
+    /**
+     * Sorts the booking history by movie name using manual Selection Sort.
+     */
     private void handleSortMyBookingByName() {
         List<String[]> bookings = new ArrayList<>(getAllUserBookings());
-        bookings.sort((a, b) -> {
-            int res = a[1].compareToIgnoreCase(b[1]);
-            return isSortNameAsc ? res : -res;
-        });
+        int n = bookings.size();
+
+        // --- Manual Selection Sort (by Name) ---
+        for (int i = 0; i < n - 1; i++) {
+            int minIdx = i;
+            for (int j = i + 1; j < n; j++) {
+                int res = bookings.get(j)[1].compareToIgnoreCase(bookings.get(minIdx)[1]);
+                // Toggle between Ascending and Descending
+                if (isSortNameAsc ? (res < 0) : (res > 0)) {
+                    minIdx = j;
+                }
+            }
+            // Swap
+            String[] temp = bookings.get(minIdx);
+            bookings.set(minIdx, bookings.get(i));
+            bookings.set(i, temp);
+        }
+
         isSortNameAsc = !isSortNameAsc;
         populateMyBookingTable(new ArrayList<>(bookings));
     }
@@ -960,22 +977,36 @@ public class UserController {
     private boolean isSortDateAsc = false;
 
     /**
-     * Sorts the booking history by date.
+     * Sorts the booking history by date using manual Selection Sort.
      */
     private void handleSortMyBookingByDate() {
         List<String[]> bookings = new ArrayList<>(getAllUserBookings());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy");
-        bookings.sort((a, b) -> {
-            try {
-                // Parse date strings for chronological comparison
-                LocalDate d1 = LocalDate.parse(a[5].trim(), formatter);
-                LocalDate d2 = LocalDate.parse(b[5].trim(), formatter);
-                int res = d1.compareTo(d2);
-                return isSortDateAsc ? res : -res;
-            } catch (Exception e) {
-                return 0; // Fallback if date is unparseable
+        int n = bookings.size();
+
+        // --- Manual Selection Sort (by Date) ---
+        for (int i = 0; i < n - 1; i++) {
+            int minIdx = i;
+            for (int j = i + 1; j < n; j++) {
+                try {
+                    // Parse date strings for chronological comparison
+                    LocalDate d1 = LocalDate.parse(bookings.get(j)[5].trim(), formatter);
+                    LocalDate d2 = LocalDate.parse(bookings.get(minIdx)[5].trim(), formatter);
+                    int res = d1.compareTo(d2);
+                    // Toggle between Ascending and Descending
+                    if (isSortDateAsc ? (res < 0) : (res > 0)) {
+                        minIdx = j;
+                    }
+                } catch (Exception e) {
+                    // Skip invalid dates
+                }
             }
-        });
+            // Swap
+            String[] temp = bookings.get(minIdx);
+            bookings.set(minIdx, bookings.get(i));
+            bookings.set(i, temp);
+        }
+
         isSortDateAsc = !isSortDateAsc; // Toggle direction
         populateMyBookingTable(new ArrayList<>(bookings));
     }
