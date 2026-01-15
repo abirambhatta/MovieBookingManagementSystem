@@ -27,30 +27,44 @@ import MovieBooking.view.AuthenticationView;
 import MovieBooking.controller.AuthenticationController;
 
 /**
- *
- * @author lenovo
+ * AdminController handles administrative tasks such as movie management,
+ * user management, and dashboard statistics. It controls the MovieBookingView
+ * when an admin is logged in.
  */
 @SuppressWarnings("unused")
 public class AdminController {
+    /** The main application view */
     private MovieBookingView view;
 
+    /** Layout manager for switching between different admin panels */
     private CardLayout cardLayout;
-    private ArrayList<Movie> movieList;
-    private List<User> allUsers; // Cached user list
 
+    /** Cache of movies loaded from file */
+    private ArrayList<Movie> movieList;
+
+    /** Cache of users loaded from file */
+    private List<User> allUsers;
+
+    /** Database file paths */
     private static final String MOVIE_FILE = "src/MovieBooking/movies.txt";
     private static final String BOOKING_FILE = "src/MovieBooking/ticket.txt";
     private static final String USER_FILE = "src/MovieBooking/users.txt";
 
+    /** Current active panel state */
     private String currentPage = "home";
+
+    /** Card identifiers for CardLayout */
     private static final String HOME_CARD = "card3";
     private static final String MOVIES_CARD = "card2";
     private static final String USERS_CARD = "card4";
+
+    /** Tracking the currently selected sidebar button */
     private javax.swing.JButton activeButton;
 
     /**
-     *
-     * @param view
+     * Initializes a new AdminController.
+     * 
+     * @param view The shared application view instance.
      */
     public AdminController(MovieBookingView view) {
         this.view = view;
@@ -63,7 +77,7 @@ public class AdminController {
         loadMovieTable();
         loadRecentBookings();
 
-        // Initialize with default view
+        // Initialize with default view (Home Dashboard)
         currentPage = "home";
         cardLayout.show(view.getContentPanel(), HOME_CARD);
         activeButton = view.getHomeButton();
@@ -72,11 +86,14 @@ public class AdminController {
         updateAdminDashboard();
     }
 
+    /**
+     * Configures table properties like selection modes and editors.
+     */
     private void configureTable() {
         view.getMovieTable().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         view.getMovieTable().setRowSelectionAllowed(true);
         view.getMovieTable().setColumnSelectionAllowed(false);
-        view.getMovieTable().setDefaultEditor(Object.class, null);
+        view.getMovieTable().setDefaultEditor(Object.class, null); // Disable direct editing
 
         view.getJTable3().setDefaultEditor(Object.class, null); // Recent bookings table
 
@@ -84,6 +101,9 @@ public class AdminController {
         view.getAdminUserTable().setDefaultEditor(Object.class, null);
     }
 
+    /**
+     * Hooks up event listeners for all interactive components in the admin view.
+     */
     private void initController() {
         // Navigation button event handlers
         view.getHomeButton().addActionListener(e -> showHomeCard());
@@ -112,9 +132,13 @@ public class AdminController {
         view.getBlockUnblockUserButton().addActionListener(e -> handleBlockUnblockUser());
         view.getDeleteUserButton().addActionListener(e -> handleDeleteUser());
 
+        /** Dialog control */
         view.getUserDetailCloseButton().addActionListener(e -> view.getUserDetailDialog().dispose());
     }
 
+    /**
+     * Adds visual hover effects to navigation buttons.
+     */
     private void addButtonHoverListeners(javax.swing.JButton button) {
         button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -156,13 +180,18 @@ public class AdminController {
         refreshUserList(); // Load fresh data
     }
 
+    /**
+     * Switches the active sidebar button visual state.
+     */
     private void setActiveButton(javax.swing.JButton button) {
         if (activeButton != null) {
+            // Revert previous button
             activeButton.setOpaque(false);
             activeButton.setBackground(new java.awt.Color(255, 255, 255));
             activeButton.setForeground(new java.awt.Color(0, 0, 0));
         }
         activeButton = button;
+        // Apply active styles
         button.setOpaque(true);
         button.setBackground(new java.awt.Color(229, 9, 20));
         button.setForeground(new java.awt.Color(255, 255, 255));
@@ -182,7 +211,9 @@ public class AdminController {
         }
     }
 
-    // --- Movie Management Logic (Kept as is) ---
+    /**
+     * Reads movie data from the persistent file into the memory list.
+     */
     private void loadMoviesFromFile() {
         movieList.clear();
         try (BufferedReader reader = new BufferedReader(new FileReader(MOVIE_FILE))) {
@@ -199,6 +230,9 @@ public class AdminController {
         }
     }
 
+    /**
+     * Writes the current memory movie list back to the text database.
+     */
     private void saveMoviesToFile() {
         try (FileWriter writer = new FileWriter(MOVIE_FILE)) {
             for (Movie movie : movieList) {
@@ -211,6 +245,9 @@ public class AdminController {
         }
     }
 
+    /**
+     * Loads the movie list into the JTable display.
+     */
     private void loadMovieTable() {
         DefaultTableModel model = (DefaultTableModel) view.getMovieTable().getModel();
         model.setRowCount(0);
@@ -248,6 +285,9 @@ public class AdminController {
         view.getMovieDialog().setVisible(true);
     }
 
+    /**
+     * Sets up listeners for the "Add/Update Movie" dialog.
+     */
     private void setupDialogListeners() {
         removeAllListeners(view.getBrowseButton(), view.getSaveButton(), view.getCancelButton());
         addEnterKeyListeners();
@@ -257,6 +297,10 @@ public class AdminController {
         setupCancelListener();
     }
 
+    /**
+     * Utility to clear all existing ActionListeners from buttons to avoid duplicate
+     * triggers.
+     */
     private void removeAllListeners(javax.swing.JButton... buttons) {
         for (javax.swing.JButton btn : buttons) {
             for (ActionListener al : btn.getActionListeners()) {
@@ -286,15 +330,23 @@ public class AdminController {
         });
     }
 
+    /**
+     * Configures the save button logic for the movie dialog.
+     * 
+     * @param movieToUpdate Existing movie object if updating, null if adding new.
+     */
     private void setupSaveListener(Movie movieToUpdate) {
         view.getSaveButton().addActionListener(e -> {
             if (validateForm()) {
                 String imagePath = movieToUpdate != null ? movieToUpdate.getImagePath() : "";
+
+                // If a new file was chosen in the file chooser
                 if (view.getFileChooser().getSelectedFile() != null) {
                     imagePath = copyImageToPosters(view.getFileChooser().getSelectedFile().getAbsolutePath());
                 }
 
                 if (movieToUpdate == null) {
+                    // ADD NEW MOVIE logic
                     Movie movie = new Movie(
                             view.getMovieNameField().getText().trim(),
                             view.getDirectorField().getText().trim(),
@@ -307,6 +359,7 @@ public class AdminController {
                     JOptionPane.showMessageDialog(view, "Movie added successfully!", "Success",
                             JOptionPane.INFORMATION_MESSAGE);
                 } else {
+                    // UPDATE EXISTING MOVIE logic
                     movieToUpdate.setName(view.getMovieNameField().getText().trim());
                     movieToUpdate.setDirector(view.getDirectorField().getText().trim());
                     movieToUpdate.setGenre((String) view.getGenreCombo().getSelectedItem());
@@ -328,6 +381,11 @@ public class AdminController {
         view.getCancelButton().addActionListener(e -> view.getMovieDialog().dispose());
     }
 
+    /**
+     * Validates that all fields in the movie form are filled correctly.
+     * 
+     * @return true if valid.
+     */
     private boolean validateForm() {
         if (view.getMovieNameField().getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(view, "Movie name is required!", "Validation Error",
@@ -357,6 +415,12 @@ public class AdminController {
         return true;
     }
 
+    /**
+     * Copies a selected movie poster image to the internal posters directory.
+     * 
+     * @param sourcePath Absolute path of the source image.
+     * @return Path to the copied image relative to project root.
+     */
     private String copyImageToPosters(String sourcePath) {
         if (sourcePath.isEmpty()) {
             return "";
@@ -365,7 +429,7 @@ public class AdminController {
             File sourceFile = new File(sourcePath);
             String fileName = sourceFile.getName();
             String destDir = "src/MovieBooking/posters";
-            new File(destDir).mkdirs();
+            new File(destDir).mkdirs(); // Ensure directory exists
             String destPath = destDir + "/" + fileName;
             Files.copy(Paths.get(sourcePath), Paths.get(destPath), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
             return destPath;
@@ -375,6 +439,9 @@ public class AdminController {
         }
     }
 
+    /**
+     * Deletes the currently selected movie from the table and file.
+     */
     private void deleteMovie() {
         int selectedRow = view.getMovieTable().getSelectedRow();
         if (selectedRow == -1) {
@@ -390,13 +457,16 @@ public class AdminController {
         if (confirm == JOptionPane.YES_OPTION) {
             DefaultTableModel model = (DefaultTableModel) view.getMovieTable().getModel();
             model.removeRow(selectedRow);
-            movieList.remove(selectedRow); // Also remove from list
+            movieList.remove(selectedRow); // Also remove from memory list
             saveMoviesToFile();
             JOptionPane.showMessageDialog(view, "Movie deleted successfully!", "Success",
                     JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
+    /**
+     * Prepares and shows the dialog for updating an existing movie.
+     */
     private void updateMovie() {
         int selectedRow = view.getMovieTable().getSelectedRow();
         if (selectedRow == -1) {
@@ -406,6 +476,7 @@ public class AdminController {
 
         Movie selectedMovie = movieList.get(selectedRow);
 
+        // Populate fields with current data
         view.getMovieNameField().setText(selectedMovie.getName());
         view.getDirectorField().setText(selectedMovie.getDirector());
         view.getGenreCombo().setSelectedItem(selectedMovie.getGenre());
@@ -415,6 +486,7 @@ public class AdminController {
         view.getImageLabel().setText(selectedMovie.getImagePath().isEmpty() ? "No Image Selected"
                 : new File(selectedMovie.getImagePath()).getName());
         view.getFileChooser().setSelectedFile(null);
+
         view.getMovieDialog().setSize(700, 500);
         CardLayout cl = (CardLayout) view.getMovieDialog().getContentPane().getLayout();
         cl.show(view.getMovieDialog().getContentPane(), "card2");
@@ -425,6 +497,9 @@ public class AdminController {
         view.getMovieDialog().setVisible(true);
     }
 
+    /**
+     * Specialized listener setup for the update flow.
+     */
     private void setupUpdateDialogListeners(final Movie selectedMovie) {
         removeAllListeners(view.getBrowseButton(), view.getSaveButton(), view.getCancelButton());
         addEnterKeyListeners();
@@ -513,22 +588,29 @@ public class AdminController {
         });
     }
 
+    /**
+     * Fetches and displays the most recent bookings in the dashboard table.
+     */
     private void loadRecentBookings() {
         DefaultTableModel model = (DefaultTableModel) view.getJTable3().getModel();
         model.setRowCount(0);
         List<String[]> allBookings = Ticket.getAllBookings();
 
+        // Show bookings in reverse order (most recent first)
         for (int i = allBookings.size() - 1; i >= 0; i--) {
             String[] b = allBookings.get(i);
             model.addRow(new Object[] { b[0], b[1], b[5] });
         }
     }
 
+    /**
+     * Updates the dashboard counter labels with real-time statistics.
+     */
     private void updateAdminDashboard() {
-        // Total Movies
+        // Total Movies count from memory list
         view.getAdminTotalMoviesLabel().setText(String.valueOf(movieList.size()));
 
-        // Total Users & Active Users
+        // Total Users count from file lines
         int userCount = 0;
         try {
             userCount = (int) Files.lines(Paths.get(USER_FILE)).count();
@@ -538,14 +620,14 @@ public class AdminController {
         view.getAdminTotalUsersLabel().setText(String.valueOf(userCount));
         view.getAdminActiveUsersLabel().setText(String.valueOf(userCount));
 
-        // Total Bookings & Revenue
+        // Total Bookings & Revenue calculation
         List<String[]> allBookings = Ticket.getAllBookings();
         int totalRevenue = 0;
         for (String[] parts : allBookings) {
             try {
                 totalRevenue += Integer.parseInt(parts[9].trim());
             } catch (NumberFormatException nfe) {
-                // Ignore invalid price
+                // Ignore invalid price data
             }
         }
         view.getAdminTotalBookingsLabel().setText(String.valueOf(allBookings.size()));
@@ -592,14 +674,17 @@ public class AdminController {
         }
     }
 
+    /**
+     * Filters the user list based on search query in the admin panel.
+     */
     private void handleSearchUser() {
         String query = view.getSearchBarUserAdmin().getText().trim().toLowerCase();
         if (query.isEmpty()) {
-            displayUserTable(allUsers); // Show all if empty
+            displayUserTable(allUsers); // Show all if search box is cleared
             return;
         }
 
-        // Filter users
+        // Filter users by username or email
         List<User> filtered = allUsers.stream()
                 .filter(u -> u.getUsername().toLowerCase().contains(query) ||
                         u.getEmail().toLowerCase().contains(query))
@@ -608,35 +693,37 @@ public class AdminController {
         displayUserTable(filtered);
     }
 
+    /**
+     * Sorts the cached user list by the specified criteria.
+     * 
+     * @param criteria "Name", "Date", or "Booking"
+     */
     private void handleSortUser(String criteria) {
         List<User> sortedList = new ArrayList<>(allUsers);
-
-        // For booking count sort, we need the counts map again unless we cache it in
-        // User object.
-        // For simplicity, let's just sort by basic fields or re-calculate for booking.
 
         switch (criteria) {
             case "Name":
                 Collections.sort(sortedList, Comparator.comparing(User::getUsername, String.CASE_INSENSITIVE_ORDER));
                 break;
             case "Date":
-                Collections.sort(sortedList, Comparator.comparing(User::getRegistrationDate).reversed()); // Newest
-                                                                                                          // first
+                Collections.sort(sortedList, Comparator.comparing(User::getRegistrationDate).reversed());
                 break;
             case "Booking":
-                // This is expensive to re-calc but correct approach without changing User model
-                // too much
+                // Retrieve current booking counts for accurate sorting
                 Map<String, Integer> counts = Ticket.getBookingCounts();
                 Collections.sort(sortedList, (u1, u2) -> {
                     int c1 = counts.getOrDefault(u1.getUsername(), 0);
                     int c2 = counts.getOrDefault(u2.getUsername(), 0);
-                    return Integer.compare(c2, c1); // Descending
+                    return Integer.compare(c2, c1); // Sort Descending (Highest first)
                 });
                 break;
         }
         displayUserTable(sortedList);
     }
 
+    /**
+     * Opens the detailed view dialog for the selected user.
+     */
     private void handleViewUserDetail() {
         int selectedRow = view.getAdminUserTable().getSelectedRow();
         if (selectedRow == -1) {
@@ -645,25 +732,22 @@ public class AdminController {
             return;
         }
 
-        String username = (String) view.getAdminUserTable().getValueAt(selectedRow, 0); // Name column
-        String email = (String) view.getAdminUserTable().getValueAt(selectedRow, 1); // Email column
+        String email = (String) view.getAdminUserTable().getValueAt(selectedRow, 1); // Email is unique ID
 
-        // Find user object
+        // Find user details from cache
         User user = getUserByEmail(email);
         if (user != null) {
             Map<String, Integer> counts = Ticket.getBookingCounts();
             int count = counts.getOrDefault(user.getUsername(), 0);
 
-            // Calculate spent? (Optional/Bonus)
-            // int moneySpent = calculateMoneySpent(user.getUsername());
-
+            // Populate labels in the detailed dialog
             view.getUserNameLabel().setText("Name: " + user.getUsername());
             view.getUserEmailLabel().setText("Email: " + user.getEmail());
             view.getUserDateLabel().setText("Registered Date: " + user.getRegistrationDate());
             view.getUserDetailBookingCountLabel().setText("Bookings: " + count);
             view.getUserStatusLabel().setText("Status: " + user.getStatus());
 
-            // Real statistics from Ticket model
+            // Real expenditure and history from Ticket model
             String recentMovie = Ticket.getRecentMovieByUser(user.getUsername());
             String moneySpent = Ticket.getTotalSpentByUser(user.getUsername());
 
@@ -676,14 +760,20 @@ public class AdminController {
         }
     }
 
+    /**
+     * Utility to find a user in the cache by email.
+     */
     private User getUserByEmail(String email) {
         for (User u : allUsers) {
             if (u.getEmail().equals(email))
                 return u;
         }
-        return null; // Should not happen if table is sync
+        return null; // Should not happen if table is in sync with file
     }
 
+    /**
+     * Toggles the blocked/active status for the selected user.
+     */
     private void handleBlockUnblockUser() {
         int selectedRow = view.getAdminUserTable().getSelectedRow();
         if (selectedRow == -1) {
@@ -694,17 +784,21 @@ public class AdminController {
         String email = (String) view.getAdminUserTable().getValueAt(selectedRow, 1);
         String currentStatus = (String) view.getAdminUserTable().getValueAt(selectedRow, 3);
 
+        // Toggle state
         String newStatus = "Active".equals(currentStatus) ? "Blocked" : "Active";
 
         if (User.updateStatus(email, newStatus)) {
             JOptionPane.showMessageDialog(view, "User status updated to " + newStatus, "Success",
                     JOptionPane.INFORMATION_MESSAGE);
-            refreshUserList();
+            refreshUserList(); // Sync table and cache
         } else {
             JOptionPane.showMessageDialog(view, "Failed to update status!", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
+    /**
+     * Completely removes the selected user from the system records.
+     */
     private void handleDeleteUser() {
         int selectedRow = view.getAdminUserTable().getSelectedRow();
         if (selectedRow == -1) {
@@ -712,7 +806,7 @@ public class AdminController {
             return;
         }
 
-        String email = (String) view.getAdminUserTable().getValueAt(selectedRow, 1); // Email as unique ID
+        String email = (String) view.getAdminUserTable().getValueAt(selectedRow, 1);
 
         int confirm = JOptionPane.showConfirmDialog(view,
                 "Are you sure you want to delete this user?\nThis cannot be undone.", "Confirm Delete",
@@ -722,7 +816,7 @@ public class AdminController {
                 JOptionPane.showMessageDialog(view, "User deleted successfully.", "Success",
                         JOptionPane.INFORMATION_MESSAGE);
                 refreshUserList();
-                updateAdminDashboard(); // Update counts
+                updateAdminDashboard(); // Update dashboard counters
             } else {
                 JOptionPane.showMessageDialog(view, "Failed to delete user.", "Error", JOptionPane.ERROR_MESSAGE);
             }

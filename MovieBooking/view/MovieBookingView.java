@@ -4,10 +4,17 @@ package MovieBooking.view;
  *
  * @author lenovo
  */
+/**
+ * MovieBookingView is the main GUI frame for the application.
+ * It contains various panels for both Admin and User roles, managed by
+ * CardLayout.
+ */
 @SuppressWarnings("unused")
 public class MovieBookingView extends javax.swing.JFrame {
 
+    /** Tracking current navigation state for Admin */
     private String currentPage = "home";
+    /** Tracking current navigation state for User */
     private String currentUserPage = "home";
 
     /**
@@ -4852,18 +4859,22 @@ public class MovieBookingView extends javax.swing.JFrame {
         return MovieLanguage6;
     }
 
+    /** @return Search field for movie browsing */
     public javax.swing.JTextField getSearchBar() {
         return SearchBar;
     }
 
+    /** @return Button to trigger movie search */
     public javax.swing.JButton getSearchButton() {
         return SearchButton;
     }
 
+    /** @return Genre filter dropdown */
     public javax.swing.JComboBox<String> getFilterGenre() {
         return FilterGenre;
     }
 
+    /** @return Language filter dropdown */
     public javax.swing.JComboBox<String> getFilterLanguage() {
         return FilterLanguage;
     }
@@ -4892,140 +4903,174 @@ public class MovieBookingView extends javax.swing.JFrame {
         return CloseTicket;
     }
 
+    /** @return Home page booking history table */
     public javax.swing.JTable getJTable1() {
         return jTable1;
     }
 
+    /** @return User's main booking history table */
     public javax.swing.JTable getJTable4() {
         return jTable4;
     }
 
+    /** @return Admin home page movie table */
     public javax.swing.JTable getJTable3() {
         return jTable3;
     }
 
+    /** @return Button to view selected ticket details */
     public javax.swing.JButton getViewTicketButton() {
         return jButton7;
     }
 
     // User Dashboard Labels
+    /** @return Label for total movie count in User dashboard */
     public javax.swing.JLabel getUserTotalMoviesLabel() { // ToatalMoviesCard -> jLabel9
         return TotalMoviesNumber;
     }
 
+    /** @return Label for booking count in User dashboard */
     public javax.swing.JLabel getUserBookingCountLabel() { // YourBookingCard -> jLabel11
         return jLabel11;
     }
 
+    /** @return Label for total money spent in User dashboard */
     public javax.swing.JLabel getMoneySpentOnTicketLabel() {
         return MoneySpentOnTicket;
     }
 
     // Admin Dashboard Labels
+    /** @return Label for total movies in Admin dashboard */
     public javax.swing.JLabel getAdminTotalMoviesLabel() {
         return TotalMovieNumber1;
     }
 
+    /** @return Label for total users in Admin dashboard */
     public javax.swing.JLabel getAdminTotalUsersLabel() {
         return TotalUserNumber;
     }
 
+    /** @return Label for total bookings in Admin dashboard */
     public javax.swing.JLabel getAdminTotalBookingsLabel() {
         return TotalUserNumber1;
     }
 
+    /** @return Label for active users in Admin dashboard */
     public javax.swing.JLabel getAdminActiveUsersLabel() {
         return ActiveUsersNumber;
     }
 
+    /** @return Label for total revenue in Admin dashboard */
     public javax.swing.JLabel getAdminTotalRevenueLabel() {
         return TotalRevenueNumber2;
     }
 
+    /** @return Table for admin user oversight */
     public javax.swing.JTable getAdminUserTable() {
         return adminUserTable;
     }
 
+    /** @return Search field for admin user lookup */
     public javax.swing.JTextField getSearchBarUserAdmin() {
         return SearchBarUserAdmin;
     }
 
+    /** @return Search button for admin user lookup */
     public javax.swing.JButton getSearchButtonUserAdmin() {
         return SearchButton1;
     }
 
+    /** @return Button to sort admins by name */
     public javax.swing.JButton getSortByNameButton() {
         return SortByName;
     }
 
+    /** @return Button to sort admins by activity */
     public javax.swing.JButton getSortByBookingButton() {
         return SortByBooking;
     }
 
+    /** @return Button to sort admins by date joined */
     public javax.swing.JButton getSortByDateButton() {
         return SortByDate;
     }
 
+    /** @return Button to launch user detail dialog */
     public javax.swing.JButton getViewUserDetailButton() {
         return ViewUserDetailButton;
     }
 
+    /** @return Button to toggle user access block */
     public javax.swing.JButton getBlockUnblockUserButton() {
         return Block_UnblockUserButton;
     }
 
+    /** @return Button to permanently delete a user */
     public javax.swing.JButton getDeleteUserButton() {
         return DeleteUser;
     }
 
+    /** @return Dialog popup for user specifics */
     public javax.swing.JDialog getUserDetailDialog() {
         return jDialog3;
     }
 
+    /** @return Button to dismiss user detail popup */
     public javax.swing.JButton getUserDetailCloseButton() {
         return CloseButton;
     }
 
+    /** @return Label for username in detail popup */
     public javax.swing.JLabel getUserNameLabel() {
         return jLabel35;
     }
 
+    /** @return Label for email in detail popup */
     public javax.swing.JLabel getUserEmailLabel() {
         return jLabel40;
     }
 
+    /** @return Label for registration date in detail popup */
     public javax.swing.JLabel getUserDateLabel() {
         return jLabel36;
     }
 
+    /** @return Label for total bookings in detail popup */
     public javax.swing.JLabel getUserDetailBookingCountLabel() {
         return jLabel37;
     }
 
+    /** @return Label for most recent watch in detail popup */
     public javax.swing.JLabel getUserRecentWatchLabel() {
         return RecentWatch;
     }
 
+    /** @return Label for total expenditure in detail popup */
     public javax.swing.JLabel getUserMoneySpentLabel() {
         return MoneySpent;
     }
 
+    /** @return Label for user account status (Active/Blocked) */
     public javax.swing.JLabel getUserStatusLabel() {
         return jLabel42;
     }
 
+    /** @return Search field for user's personal bookings */
     public javax.swing.JTextField getSearchBarForMyBooking() {
         return SearchBarForMyBooking;
     }
 
+    /** @return Search button for user's personal bookings */
     public javax.swing.JButton getSearchButtonForMyBooking() {
         return SearchButtonForMyBooking;
     }
 
+    /** @return Button to sort personal bookings by movie name */
     public javax.swing.JButton getSortByMovieNameButtonMyBooking() {
         return jButton5;
     }
 
+    /** @return Button to sort personal bookings by date */
     public javax.swing.JButton getSortByDateButtonMyBooking() {
         return SortByDate1;
     }

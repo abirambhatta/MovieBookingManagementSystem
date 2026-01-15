@@ -26,25 +26,49 @@ import MovieBooking.view.MovieBookingView;
 import MovieBooking.view.AuthenticationView;
 import MovieBooking.controller.AuthenticationController;
 
+/**
+ * UserController manages the user interface and logic for customers.
+ * It handles movie browsing, booking, profile management, and navigation.
+ */
 public class UserController {
+    /** The main application view */
     private MovieBookingView view;
+
+    /** Set of currently highlighted sidebar buttons */
     private Set<javax.swing.JButton> activeButtons;
+
+    /** Email of the currently logged-in user */
     private String loggedInUserIdentifier;
+
+    /** Cache of movies loaded from file */
     private ArrayList<Movie> movieList;
-    private JPanel dynamicGalleryPanel; // New panel for movies only
+
+    /** Dynamically generated panel for the movie gallery */
+    private JPanel dynamicGalleryPanel;
+
+    /** Constant for movie data file path */
     private static final String MOVIE_FILE = "src/MovieBooking/movies.txt";
 
+    /** State variables for current booking process */
     private Movie currentMovie;
     private Set<javax.swing.JToggleButton> selectedSeats;
     private javax.swing.JToggleButton selectedTimeBtn;
     private String selectedDate;
 
+    /**
+     * Initializes a new UserController for the specified user.
+     * 
+     * @param view                   The shared application view instance.
+     * @param loggedInUserIdentifier The email/username of the user.
+     */
     public UserController(MovieBookingView view, String loggedInUserIdentifier) {
         this.view = view;
         this.loggedInUserIdentifier = loggedInUserIdentifier;
         this.activeButtons = new HashSet<>();
         this.selectedSeats = new HashSet<>();
         this.movieList = new ArrayList<>();
+
+        // Show the user dashboard by default
         java.awt.CardLayout cl = (java.awt.CardLayout) view.getContentPane().getLayout();
         cl.show(view.getContentPane(), "card3");
 
@@ -53,14 +77,18 @@ public class UserController {
         initBookingListeners();
         updateWelcomeBar();
         configureTables();
-        loadMoviesFromFile(); // Ensure movies are loaded
-        populateFilters(true); // Force "all" selection on first load
+        loadMoviesFromFile();
+        populateFilters(true); // Default to "all genre/language"
         showUserHome();
         refreshBookingTables();
         updateUserDashboard();
     }
 
+    /**
+     * Maps listeners to all navigation and action buttons.
+     */
     private void initUserController() {
+        // Button sets across different pages for consistent navigation
         javax.swing.JButton[][] buttonSets = {
                 { view.getHomeButton1(), view.getMoviesButton1(), view.getUsersButton1(), view.getUsersButton2(),
                         view.getLogoutButton1() },
@@ -102,43 +130,29 @@ public class UserController {
         });
     }
 
+    /**
+     * Configures listeners and hover effects for a set of sidebar buttons.
+     */
     private void setupPageButtons(javax.swing.JButton homeBtn, javax.swing.JButton moviesBtn,
             javax.swing.JButton bookingBtn, javax.swing.JButton profileBtn, javax.swing.JButton logoutBtn) {
-        homeBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                showUserHome();
-            }
-        });
+        homeBtn.addActionListener(e -> showUserHome());
         addButtonHoverListeners(homeBtn);
 
-        moviesBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                showBrowseMovies();
-            }
-        });
+        moviesBtn.addActionListener(e -> showBrowseMovies());
         addButtonHoverListeners(moviesBtn);
 
-        bookingBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                showMyBooking();
-            }
-        });
+        bookingBtn.addActionListener(e -> showMyBooking());
         addButtonHoverListeners(bookingBtn);
 
-        profileBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                showProfile();
-            }
-        });
+        profileBtn.addActionListener(e -> showProfile());
         addButtonHoverListeners(profileBtn);
 
-        logoutBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                performLogout();
-            }
-        });
+        logoutBtn.addActionListener(e -> performLogout());
     }
 
+    /**
+     * Adds visual hover effects to buttons if they are not active.
+     */
     private void addButtonHoverListeners(javax.swing.JButton button) {
         button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -246,6 +260,12 @@ public class UserController {
         }
     }
 
+    /**
+     * Helper to switch cards and update active button highlighting.
+     * 
+     * @param cardName The identifier of the card to show.
+     * @param buttons  The buttons corresponding to this card.
+     */
     private void showCard(String cardName, javax.swing.JButton... buttons) {
         java.awt.CardLayout cl = (java.awt.CardLayout) view.getUserPanel().getLayout();
         cl.show(view.getUserPanel(), cardName);
@@ -253,6 +273,9 @@ public class UserController {
         setActiveButtons(buttons);
     }
 
+    /**
+     * Resets all navigation buttons to their default (inactive) appearance.
+     */
     private void resetAllButtons() {
         javax.swing.JButton[] allButtons = {
                 view.getHomeButton1(), view.getMoviesButton1(), view.getUsersButton1(), view.getUsersButton2(),
@@ -267,6 +290,9 @@ public class UserController {
         }
     }
 
+    /**
+     * Highlights the buttons corresponding to the current active card.
+     */
     private void setActiveButtons(javax.swing.JButton... buttons) {
         activeButtons.clear();
         for (javax.swing.JButton btn : buttons) {
@@ -277,21 +303,21 @@ public class UserController {
         }
     }
 
+    /**
+     * Updates the welcome message, email, and dates on the user home dashboard.
+     */
     private void updateWelcomeBar() {
-        // Get user details
         User user = User.getUserDetails(loggedInUserIdentifier);
 
         if (user != null) {
-            // Update home page welcome bar
             view.getWelcomeLabel().setText("Welcome " + user.getUsername());
             view.getEmailLabel().setText(user.getEmail());
 
-            // Update today's date
+            // Format dates for display
             LocalDate today = LocalDate.now();
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMMM dd, yyyy");
             view.getDateLabel().setText("Today's Date: " + today.format(dateFormatter));
 
-            // Update member since date
             if (user.getRegistrationDate() != null) {
                 view.getMemberSinceLabel().setText("Member Since: " + user.getRegistrationDate().format(dateFormatter));
             } else {
@@ -300,6 +326,9 @@ public class UserController {
         }
     }
 
+    /**
+     * Terminates the user session and returns to login.
+     */
     private void performLogout() {
         int confirm = JOptionPane.showConfirmDialog(view,
                 "Are you sure you want to logout?",
@@ -314,6 +343,9 @@ public class UserController {
         }
     }
 
+    /**
+     * Loads the movie database from file into memory.
+     */
     private void loadMoviesFromFile() {
         movieList.clear();
         try (BufferedReader reader = new BufferedReader(new FileReader(MOVIE_FILE))) {
@@ -350,13 +382,16 @@ public class UserController {
         dynamicGalleryPanel.repaint();
     }
 
+    /**
+     * Initializes the Browse Movies page layout.
+     * This method dynamically restructures the view's content panel to implement
+     * a clean, scrollable gallery view with headers and filters.
+     */
     private void initBrowsePageLayout() {
-        JPanel mainPanel = view.getMoviePanelContainer(); // This is jPanel7
+        JPanel mainPanel = view.getMoviePanelContainer();
 
-        // Save references to existing components from jPanel7
+        // Extract and keep references to existing UI components for reuse in new layout
         java.awt.Component[] components = mainPanel.getComponents();
-
-        // Find specific components we want to keep in the header
         JLabel browseTitle = null;
         javax.swing.JTextField sBar = view.getSearchBar();
         JButton sBtn = view.getSearchButton();
@@ -381,7 +416,6 @@ public class UserController {
             }
         }
 
-        // If we didn't find the label by text, try to find it by name
         if (recentLabel == null) {
             for (java.awt.Component comp : components) {
                 if (comp.getName() != null && comp.getName().equals("RecentBooking4")) {
@@ -391,17 +425,17 @@ public class UserController {
             }
         }
 
-        // Clear the main panel to reset layout
+        // Reset main panel layout to BorderLayout
         mainPanel.removeAll();
         mainPanel.setLayout(new java.awt.BorderLayout(0, 0));
 
-        // Create Header Panel
+        // Construct the Header Panel (Title, Search, Filters)
         JPanel headerPanel = new JPanel();
         headerPanel.setBackground(new java.awt.Color(249, 249, 249));
         headerPanel.setLayout(new javax.swing.BoxLayout(headerPanel, javax.swing.BoxLayout.Y_AXIS));
         headerPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 26, 10, 0));
 
-        // Row 1: Title
+        // 1. Title Row
         if (browseTitle == null) {
             browseTitle = new JLabel("Browse Movies");
             browseTitle.setFont(new java.awt.Font("Segoe UI", 1, 24));
@@ -410,7 +444,7 @@ public class UserController {
         headerPanel.add(browseTitle);
         headerPanel.add(javax.swing.Box.createRigidArea(new java.awt.Dimension(0, 15)));
 
-        // Row 2: Search Bar
+        // 2. Search Row
         JPanel searchRow = new JPanel(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 0));
         searchRow.setOpaque(false);
         sBar.setPreferredSize(new java.awt.Dimension(300, 32));
@@ -421,7 +455,7 @@ public class UserController {
         headerPanel.add(searchRow);
         headerPanel.add(javax.swing.Box.createRigidArea(new java.awt.Dimension(0, 15)));
 
-        // Row 3: "Now Showing" Label (Above filters as requested)
+        // 3. Status/Section Label
         if (recentLabel == null) {
             recentLabel = new JLabel("Now Showing");
             recentLabel.setFont(new java.awt.Font("Segoe UI", 1, 18));
@@ -432,18 +466,18 @@ public class UserController {
         headerPanel.add(recentLabel);
         headerPanel.add(javax.swing.Box.createRigidArea(new java.awt.Dimension(0, 10)));
 
-        // Row 4: Filters
+        // 4. Filter Row
         JPanel filterRow = new JPanel(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 0));
         filterRow.setOpaque(false);
         if (filterLabel1 == null)
             filterLabel1 = new JLabel("genre: ");
         else
-            filterLabel1.setText("genre: "); // Lowercase label
+            filterLabel1.setText("genre: ");
 
         if (filterLabel2 == null)
             filterLabel2 = new JLabel("language: ");
         else
-            filterLabel2.setText("language: "); // Lowercase label
+            filterLabel2.setText("language: ");
 
         filterRow.add(filterLabel1);
         filterRow.add(fGenre);
@@ -454,13 +488,13 @@ public class UserController {
         headerPanel.add(filterRow);
         headerPanel.add(javax.swing.Box.createRigidArea(new java.awt.Dimension(0, 20)));
 
-        // Gallery Panel
+        // 5. Gallery Panel Initialization
         dynamicGalleryPanel = new JPanel();
         dynamicGalleryPanel.setBackground(new java.awt.Color(249, 249, 249));
-        // Exactly 2 columns
-        dynamicGalleryPanel.setLayout(new java.awt.GridLayout(0, 2, 30, 30));
+        dynamicGalleryPanel.setLayout(new java.awt.GridLayout(0, 2, 30, 30)); // 2 Columns
         dynamicGalleryPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 26, 0, 26));
 
+        // Finalize assembly
         mainPanel.add(headerPanel, java.awt.BorderLayout.NORTH);
         mainPanel.add(dynamicGalleryPanel, java.awt.BorderLayout.CENTER);
 
@@ -470,12 +504,18 @@ public class UserController {
 
     private boolean isPopulatingFilters = false;
 
+    /**
+     * Populates the genre and language filter dropdowns based on available movies.
+     * 
+     * @param forceAll If true, resets selection to "all".
+     */
     private void populateFilters(boolean forceAll) {
         isPopulatingFilters = true;
 
         String currentGenre = null;
         String currentLang = null;
 
+        // Save current selection to restore after refresh
         if (!forceAll) {
             currentGenre = (String) view.getFilterGenre().getSelectedItem();
             currentLang = (String) view.getFilterLanguage().getSelectedItem();
@@ -487,6 +527,7 @@ public class UserController {
         view.getFilterGenre().addItem("all genre");
         view.getFilterLanguage().addItem("all language");
 
+        // Use TreeSet for automatic sorting and uniqueness
         TreeSet<String> genres = new TreeSet<>();
         TreeSet<String> languages = new TreeSet<>();
 
@@ -504,6 +545,7 @@ public class UserController {
         for (String l : languages)
             view.getFilterLanguage().addItem(l);
 
+        // Restore or default selection
         if (currentGenre != null && !forceAll)
             view.getFilterGenre().setSelectedItem(currentGenre);
         else
@@ -517,11 +559,14 @@ public class UserController {
         isPopulatingFilters = false;
     }
 
+    /**
+     * Hooks up listeners for search and filter controls in the browse page.
+     */
     private void initSearchAndFilters() {
-        // Search triggers only on button click
+        // Search button click starts filtering
         view.getSearchButton().addActionListener(e -> handleFiltering());
 
-        // Dropdown filters remain instant
+        // Dropdown selection triggers filtering immediately
         view.getFilterGenre().addActionListener(e -> {
             if (!isPopulatingFilters)
                 handleFiltering();
@@ -533,6 +578,10 @@ public class UserController {
         });
     }
 
+    /**
+     * Applies search text and dropdown filters to the movie list and refreshes the
+     * display.
+     */
     private void handleFiltering() {
         String searchText = view.getSearchBar().getText().toLowerCase();
         String selectedGenre = (String) view.getFilterGenre().getSelectedItem();
@@ -553,31 +602,35 @@ public class UserController {
         displayMovies(filteredList);
     }
 
+    /**
+     * Dynamically creates a UI panel for a single movie card.
+     * 
+     * @param movie The movie data to display.
+     * @return A JPanel containing the movie poster, details, and "Book Now" button.
+     */
     private javax.swing.JPanel createMoviePanel(Movie movie) {
         // Theme Colors
         java.awt.Color themeBackground = new java.awt.Color(249, 249, 249);
         java.awt.Color themeRed = new java.awt.Color(229, 9, 20);
 
-        // Outer Panel
+        // 1. Outer Container
         javax.swing.JPanel panel = new javax.swing.JPanel();
         panel.setBackground(themeBackground);
-        // Using theme red for border
         panel.setBorder(javax.swing.BorderFactory.createLineBorder(themeRed));
         panel.setLayout(new java.awt.BorderLayout());
         panel.setPreferredSize(new java.awt.Dimension(250, 420));
 
-        // Poster Section
+        // 2. Poster Section (Top)
         javax.swing.JPanel posterPanel = new javax.swing.JPanel();
-        posterPanel.setBackground(java.awt.Color.WHITE); // Keep poster background white for contrast
+        posterPanel.setBackground(java.awt.Color.WHITE);
         posterPanel.setPreferredSize(new java.awt.Dimension(250, 201));
         posterPanel.setLayout(new java.awt.BorderLayout());
-        // Red separator line
         posterPanel.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, themeRed));
 
         if (movie.getImagePath() != null && !movie.getImagePath().isEmpty()) {
             try {
+                // Load and scale poster image
                 javax.swing.ImageIcon icon = new javax.swing.ImageIcon(movie.getImagePath());
-                // Scale image to fit poster area
                 java.awt.Image img = icon.getImage();
                 java.awt.Image scaledImg = img.getScaledInstance(250, 201, java.awt.Image.SCALE_SMOOTH);
                 posterPanel.add(new javax.swing.JLabel(new javax.swing.ImageIcon(scaledImg)),
@@ -589,15 +642,14 @@ public class UserController {
             posterPanel.add(new javax.swing.JLabel("No Image", javax.swing.SwingConstants.CENTER));
         }
 
-        // Detail Section
+        // 3. Detail Section (Center)
         javax.swing.JPanel detailPanel = new javax.swing.JPanel();
-        // Light red tint for the background to match theme
         detailPanel.setBackground(new java.awt.Color(255, 245, 245));
         detailPanel.setLayout(new javax.swing.BoxLayout(detailPanel, javax.swing.BoxLayout.Y_AXIS));
         detailPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 19, 10, 19));
 
         javax.swing.JLabel nameLabel = new javax.swing.JLabel(movie.getName());
-        nameLabel.setForeground(themeRed); // Red title
+        nameLabel.setForeground(themeRed);
         nameLabel.setFont(new java.awt.Font("Segoe UI", 1, 14));
 
         javax.swing.JLabel genreLabel = new javax.swing.JLabel("Genre: " + movie.getGenre());
@@ -609,6 +661,7 @@ public class UserController {
         javax.swing.JLabel langLabel = new javax.swing.JLabel("Language: " + movie.getLanguage());
         langLabel.setForeground(java.awt.Color.DARK_GRAY);
 
+        // "Book Now" Button and its centered container
         javax.swing.JButton bookBtn = new javax.swing.JButton("Book Now");
         bookBtn.setBackground(themeRed);
         bookBtn.setForeground(java.awt.Color.WHITE);
@@ -620,13 +673,12 @@ public class UserController {
             showBookingDialog();
         });
 
-        // Container to center the button horizontally
         javax.swing.JPanel buttonContainer = new javax.swing.JPanel(
                 new java.awt.FlowLayout(java.awt.FlowLayout.CENTER));
-        buttonContainer.setOpaque(false); // Transparent to show detailPanel color
+        buttonContainer.setOpaque(false);
         buttonContainer.add(bookBtn);
 
-        // Add spacing between labels
+        // Assembly detail components with spacing
         detailPanel.add(javax.swing.Box.createRigidArea(new java.awt.Dimension(0, 5)));
         detailPanel.add(nameLabel);
         detailPanel.add(javax.swing.Box.createRigidArea(new java.awt.Dimension(0, 8)));
@@ -635,7 +687,6 @@ public class UserController {
         detailPanel.add(timeLabel);
         detailPanel.add(javax.swing.Box.createRigidArea(new java.awt.Dimension(0, 3)));
         detailPanel.add(langLabel);
-        // Larger space before the button
         detailPanel.add(javax.swing.Box.createRigidArea(new java.awt.Dimension(0, 20)));
         detailPanel.add(buttonContainer);
 
@@ -645,13 +696,19 @@ public class UserController {
         return panel;
     }
 
+    /**
+     * Resets state and opens the movie booking dialog.
+     */
     private void showBookingDialog() {
         selectedSeats.clear();
         selectedTimeBtn = null;
         resetBookingUI();
         view.getPriceLabel().setText("0");
+
+        // Ensure card2 (Selection) is showing initially
         java.awt.CardLayout cl = (java.awt.CardLayout) view.getBookingDialog().getContentPane().getLayout();
         cl.show(view.getBookingDialog().getContentPane(), "card2");
+
         view.getBookingDialog().pack();
         view.getBookingDialog().setLocationRelativeTo(view);
         view.getMovieNameLabel().setText(currentMovie.getName());
@@ -690,7 +747,11 @@ public class UserController {
         selectedDate = null;
     }
 
+    /**
+     * Hooks up listeners for all interactive components within the booking dialog.
+     */
     private void initBookingListeners() {
+        // 1. Seat Button Listeners
         javax.swing.JToggleButton[] allSeats = {
                 view.getSeatA1(), view.getSeatA2(), view.getSeatA3(), view.getSeatA4(), view.getSeatA5(),
                 view.getSeatA6(),
@@ -709,6 +770,7 @@ public class UserController {
             seat.addActionListener(e -> handleSeatSelection(seat));
         }
 
+        // 2. Show Time Listeners
         javax.swing.JToggleButton[] timeBtns = { view.getTimeBtn1(), view.getTimeBtn2(), view.getTimeBtn3(),
                 view.getTimeBtn4() };
         for (javax.swing.JToggleButton btn : timeBtns) {
@@ -719,10 +781,11 @@ public class UserController {
 
         view.getCancelBookingButton().addActionListener(e -> view.getBookingDialog().setVisible(false));
 
-        // Date selection listeners
+        // 3. Date selection listeners
         view.getTodayButton().addActionListener(e -> handleDateSelection(view.getTodayButton(), "Today"));
         view.getTomorrowButton().addActionListener(e -> handleDateSelection(view.getTomorrowButton(), "Tomorrow"));
 
+        // 4. "Generate Ticket" flow
         view.getGenerateTicketButton().addActionListener(e -> {
             if (selectedSeats.isEmpty() || selectedTimeBtn == null || selectedDate == null) {
                 JOptionPane.showMessageDialog(view.getBookingDialog(),
@@ -731,7 +794,7 @@ public class UserController {
                 return;
             }
             populateTicket();
-            // Transition to ticket view
+            // Transition to Ticket Summary (card3)
             java.awt.CardLayout cl = (java.awt.CardLayout) view.getBookingDialog().getContentPane().getLayout();
             cl.show(view.getBookingDialog().getContentPane(), "card3");
         });
@@ -760,11 +823,16 @@ public class UserController {
         }
     }
 
+    /**
+     * Populates the ticket summary view in the booking dialog with selected
+     * details.
+     */
     private void populateTicket() {
         view.getMovieNameLabel().setText("Movie: " + currentMovie.getName());
         view.getTicketDateLabel().setText("Date: " + selectedDate);
         view.getTicketTimeLabel().setText("Time: " + selectedTimeBtn.getText());
 
+        // Format selected seats into a comma-separated string
         StringBuilder seatsStr = new StringBuilder("Seat: ");
         TreeSet<String> seatNames = new TreeSet<>();
         for (javax.swing.JToggleButton seat : selectedSeats) {
@@ -776,10 +844,13 @@ public class UserController {
         view.getTicketSeatTypeLabel().setText("Seat Type: " + view.getSeatTypeCombo().getSelectedItem());
         view.getTicketPriceLabel().setText("Price: $" + view.getPriceLabel().getText());
 
-        saveBooking();
-        refreshBookingTables();
+        saveBooking(); // Persist to file
+        refreshBookingTables(); // Update UI tables
     }
 
+    /**
+     * Saves the current booking details to the ticket database file.
+     */
     private void saveBooking() {
         StringBuilder seatsStr = new StringBuilder();
         TreeSet<String> seatNames = new TreeSet<>();
@@ -788,6 +859,7 @@ public class UserController {
         }
         seatsStr.append(String.join(", ", seatNames));
 
+        // Construct semicolon-delimited string for storage
         String bookingData = String.join(";",
                 loggedInUserIdentifier,
                 currentMovie.getName(),
@@ -801,12 +873,15 @@ public class UserController {
                 view.getPriceLabel().getText());
 
         if (Ticket.saveBooking(bookingData)) {
-            // Message removed as per user request
+            // Success
         } else {
             JOptionPane.showMessageDialog(view, "Error saving booking!", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
+    /**
+     * Refreshes both the generic history table and the home dashboard recent panel.
+     */
     private void refreshBookingTables() {
         List<String[]> allBookings = getAllUserBookings();
         populateMyBookingTable(new ArrayList<>(allBookings));
@@ -815,11 +890,11 @@ public class UserController {
                 .getModel();
         homeBookingModel.setRowCount(0);
 
-        // Fill Home Recent Bookings (top 3)
+        // Fill Home Recent Bookings (limit to top 3 newest)
         int count = 0;
         for (int i = allBookings.size() - 1; i >= 0 && count < 3; i--) {
             String[] b = allBookings.get(i);
-            // Table columns: Name, Genre, Language, Rated
+            // Columns: Name, Genre, Language, Rating
             homeBookingModel.addRow(new Object[] { b[1], b[2], b[3], b[4] });
             count++;
         }
@@ -849,6 +924,9 @@ public class UserController {
         view.getSortByDateButtonMyBooking().addActionListener(e -> handleSortMyBookingByDate());
     }
 
+    /**
+     * Filters the user's booking history by movie name.
+     */
     private void handleSearchMyBooking() {
         String query = view.getSearchBarForMyBooking().getText().toLowerCase().trim();
         List<String[]> all = getAllUserBookings();
@@ -857,6 +935,7 @@ public class UserController {
             return;
         }
 
+        // Case-insensitive search on movie name (index 1)
         ArrayList<String[]> filtered = new ArrayList<>();
         for (String[] b : all) {
             if (b[1].toLowerCase().contains(query)) {
@@ -880,20 +959,24 @@ public class UserController {
 
     private boolean isSortDateAsc = false;
 
+    /**
+     * Sorts the booking history by date.
+     */
     private void handleSortMyBookingByDate() {
         List<String[]> bookings = new ArrayList<>(getAllUserBookings());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy");
         bookings.sort((a, b) -> {
             try {
+                // Parse date strings for chronological comparison
                 LocalDate d1 = LocalDate.parse(a[5].trim(), formatter);
                 LocalDate d2 = LocalDate.parse(b[5].trim(), formatter);
                 int res = d1.compareTo(d2);
                 return isSortDateAsc ? res : -res;
             } catch (Exception e) {
-                return 0;
+                return 0; // Fallback if date is unparseable
             }
         });
-        isSortDateAsc = !isSortDateAsc;
+        isSortDateAsc = !isSortDateAsc; // Toggle direction
         populateMyBookingTable(new ArrayList<>(bookings));
     }
 
@@ -978,11 +1061,14 @@ public class UserController {
         view.getBookingDialog().setVisible(true);
     }
 
+    /**
+     * Updates the user's dashboard labels with aggregate statistics.
+     */
     private void updateUserDashboard() {
-        // Total Movies
+        // Total library movies
         view.getUserTotalMoviesLabel().setText(String.valueOf(movieList.size()));
 
-        // Total Bookings and Money Spent for User
+        // Aggregate booking count and expenditure
         int bookingCount = 0;
         double totalSpent = 0.0;
 
@@ -990,10 +1076,11 @@ public class UserController {
         for (String[] parts : userBookings) {
             bookingCount++;
             try {
+                // Sum price values (index 9)
                 double price = Double.parseDouble(parts[9].trim());
                 totalSpent += price;
             } catch (NumberFormatException e) {
-                // Ignore invalid price
+                // Skip entries with invalid price formatting
             }
         }
 

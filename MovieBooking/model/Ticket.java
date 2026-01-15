@@ -7,7 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Ticket model handles ticket booking data, file storage, and reporting
+ * Ticket model handles ticket booking data, file storage, and reporting.
+ * It encapsulates all information related to a movie booking transaction.
  */
 public class Ticket {
     private String username;
@@ -21,8 +22,14 @@ public class Ticket {
     private String seatType;
     private String price;
 
+    /** Path to the booking records file */
     private static final String BOOKING_FILE = "src/MovieBooking/ticket.txt";
 
+    /**
+     * Constructs a Ticket object from a raw data array.
+     * 
+     * @param parts String array containing booking details (split from file line)
+     */
     public Ticket(String[] parts) {
         if (parts.length >= 10) {
             this.username = parts[0];
@@ -39,9 +46,9 @@ public class Ticket {
     }
 
     /**
-     * Calculates the number of bookings per user.
+     * Calculates the number of bookings per user by scanning the database.
      * 
-     * @return A map of usernames to their booking count.
+     * @return A map of usernames to their respective booking counts.
      */
     public static Map<String, Integer> getBookingCounts() {
         Map<String, Integer> counts = new HashMap<>();
@@ -57,15 +64,15 @@ public class Ticket {
                 }
             }
         } catch (IOException e) {
-            // File might not exist yet
+            // File might not exist yet if no bookings have been made
         }
         return counts;
     }
 
     /**
-     * Reads all bookings from the file.
+     * Reads all bookings from the persistent storage file.
      * 
-     * @return List of string arrays representing booking rows.
+     * @return List of string arrays, each representing a full booking record.
      */
     public static List<String[]> getAllBookings() {
         List<String[]> bookings = new ArrayList<>();
@@ -80,16 +87,16 @@ public class Ticket {
                 }
             }
         } catch (IOException e) {
-            // Ignore
+            // Returns empty list if file cannot be read
         }
         return bookings;
     }
 
     /**
-     * Reads bookings for a specific user.
+     * Filters for bookings related to a specific user.
      * 
-     * @param userIdentifier Username or Email
-     * @return List of string arrays for the user.
+     * @param userIdentifier Username or Email to search for
+     * @return List of booking records for that user.
      */
     public static List<String[]> getBookingsForUser(String userIdentifier) {
         List<String[]> userBookings = new ArrayList<>();
@@ -102,24 +109,24 @@ public class Ticket {
     }
 
     /**
-     * Gets the most recent movie booked by a user.
+     * Identifies the most recent movie booked by a user.
      * 
      * @param userIdentifier Username or Email
-     * @return Name of the movie or "N/A"
+     * @return Name of the most recently booked movie, or "N/A"
      */
     public static String getRecentMovieByUser(String userIdentifier) {
         List<String[]> bookings = getBookingsForUser(userIdentifier);
         if (bookings.isEmpty())
             return "N/A";
-        // Assuming the last one in the file is the most recent
+        // Assuming the last entry in the file is chronological
         return bookings.get(bookings.size() - 1)[1];
     }
 
     /**
-     * Calculates total money spent by a user.
+     * Summarizes the total financial expenditure for a user.
      * 
      * @param userIdentifier Username or Email
-     * @return Total spent formatted as string.
+     * @return Total amount spent string (formatted as integer string).
      */
     public static String getTotalSpentByUser(String userIdentifier) {
         List<String[]> bookings = getBookingsForUser(userIdentifier);
@@ -128,16 +135,17 @@ public class Ticket {
             try {
                 total += Integer.parseInt(b[9].trim());
             } catch (Exception e) {
+                // Skip malformed price data
             }
         }
         return String.valueOf(total);
     }
 
     /**
-     * Saves a new booking record to the file.
+     * Appends a new booking record to the persistence file.
      * 
-     * @param bookingData Semi-colon separated booking string.
-     * @return true if successful.
+     * @param bookingData Raw semi-colon concatenated booking status.
+     * @return true if write operation succeeded.
      */
     public static boolean saveBooking(String bookingData) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(BOOKING_FILE, true))) {
@@ -148,43 +156,54 @@ public class Ticket {
         }
     }
 
-    // Getters
+    // --- Getters ---
+
+    /** @return Username of the ticket owner */
     public String getUsername() {
         return username;
     }
 
+    /** @return Name of the movie */
     public String getMovieName() {
         return movieName;
     }
 
+    /** @return Movie genre */
     public String getGenre() {
         return genre;
     }
 
+    /** @return Movie language */
     public String getLanguage() {
         return language;
     }
 
+    /** @return Audience rating */
     public String getRating() {
         return rating;
     }
 
+    /** @return Booking date */
     public String getDate() {
         return date;
     }
 
+    /** @return Show time */
     public String getTime() {
         return time;
     }
 
+    /** @return Selected seats (comma separated) */
     public String getSeats() {
         return seats;
     }
 
+    /** @return Type of seat (e.g., Gold, Platinum) */
     public String getSeatType() {
         return seatType;
     }
 
+    /** @return Total price of the ticket */
     public String getPrice() {
         return price;
     }

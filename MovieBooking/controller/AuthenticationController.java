@@ -15,27 +15,32 @@ import MovieBooking.controller.AdminController;
 import MovieBooking.controller.UserController;
 
 /**
- * AuthenticationController handles all authentication with CardLayout
- * Manages login, signup, and forgot password with dynamic resizing
+ * AuthenticationController manages the user entry point of the application.
+ * It coordinates with AuthenticationView and uses CardLayout to toggle between
+ * Login, Sign-Up, and Forgot Password screens.
  */
 public class AuthenticationController {
+    /** The view being managed by this controller */
     private AuthenticationView view;
+
+    /** Layout manager for switching between auth cards */
     private CardLayout cardLayout;
 
-    // Card names
+    /** Card identifiers for CardLayout internal switching */
     private static final String LOGIN_CARD = "card2";
     private static final String SIGNUP_CARD = "card3";
     private static final String FORGOT_CARD = "card4";
 
     /**
-     *
-     * @param view
+     * Constructs the controller and initializes the starting state.
+     * 
+     * @param view The login/registration frame.
      */
     public AuthenticationController(AuthenticationView view) {
         this.view = view;
         this.cardLayout = (CardLayout) view.getContentPane().getLayout();
         initController();
-        showLoginCard(); // Start with login
+        showLoginCard(); // Application starts here
     }
 
     private void initController() {
@@ -114,8 +119,12 @@ public class AuthenticationController {
         setupEnterKeyNavigation();
     }
 
+    /**
+     * Switches the view to the Login card and resets fields.
+     */
     private void showLoginCard() {
         cardLayout.show(view.getContentPane(), LOGIN_CARD);
+        // Pack to shrink/expand window based on card contents
         if (view.getExtendedState() != javax.swing.JFrame.MAXIMIZED_BOTH) {
             view.pack();
             view.setLocationRelativeTo(null);
@@ -125,6 +134,9 @@ public class AuthenticationController {
         clearFields();
     }
 
+    /**
+     * Switches the view to the Sign-Up card.
+     */
     private void showSignUpCard() {
         cardLayout.show(view.getContentPane(), SIGNUP_CARD);
         if (view.getExtendedState() != javax.swing.JFrame.MAXIMIZED_BOTH) {
@@ -134,6 +146,9 @@ public class AuthenticationController {
         clearFields();
     }
 
+    /**
+     * Switches the view to the Forgot Password card.
+     */
     private void showForgotCard() {
         cardLayout.show(view.getContentPane(), FORGOT_CARD);
         if (view.getExtendedState() != javax.swing.JFrame.MAXIMIZED_BOTH) {
@@ -145,15 +160,19 @@ public class AuthenticationController {
         clearFields();
     }
 
+    /**
+     * Extracts credentials and validates them against Admin and User records.
+     */
     private void performLogin() {
         String identifier = view.getEmailTextField4().getText().trim();
         String password = new String(view.getPasswordPasswordField4().getPassword());
 
+        // Basic format validation
         if (!validation.validateLogin(identifier, password, view)) {
             return;
         }
 
-        // Check if admin login
+        // 1. Check if it's an Administrative login
         if (Admin.isAdmin(identifier, password)) {
             JOptionPane.showMessageDialog(view, "Admin Login Successful!\nWelcome Administrator", "Admin Access",
                     JOptionPane.INFORMATION_MESSAGE);
@@ -161,8 +180,10 @@ public class AuthenticationController {
             MovieBookingView movieBookingView = new MovieBookingView();
             new AdminController(movieBookingView);
             movieBookingView.setVisible(true);
-        } else if (User.authenticateUser(identifier, password)) {
-            // Check if blocked by admin
+        }
+        // 2. Check regular User login
+        else if (User.authenticateUser(identifier, password)) {
+            // Enforcement: block users marked as 'Blocked' by admin
             if (User.isUserBlocked(identifier)) {
                 JOptionPane.showMessageDialog(view, "You have been blocked by the admin!", "Access Denied",
                         JOptionPane.ERROR_MESSAGE);
@@ -175,8 +196,9 @@ public class AuthenticationController {
             MovieBookingView movieBookingView = new MovieBookingView();
             new UserController(movieBookingView, identifier);
             movieBookingView.setVisible(true);
-        } else {
-            // Check if user exists but is blocked (optional but good for UX)
+        }
+        // 3. Fallback for failed authentication
+        else {
             if (User.isUserBlocked(identifier)) {
                 JOptionPane.showMessageDialog(view, "You have been blocked by the admin!", "Access Denied",
                         JOptionPane.ERROR_MESSAGE);
@@ -186,24 +208,28 @@ public class AuthenticationController {
         }
     }
 
+    /**
+     * Logic for registering a new user account.
+     */
     private void performSignUp() {
         String username = view.getUsernameTextField().getText().trim();
         String email = view.getEmailTextField5().getText().trim();
         String password = new String(view.getPasswordPasswordField5().getPassword());
         String confirm = new String(view.getConfirmPasswordPasswordField().getPassword());
 
+        // Validate form requirements
         if (!validation.validateSignUp(username, email, password, confirm, view)) {
             return;
         }
 
-        // Check if user already exists
+        // Prevent duplicate registration
         if (User.userExists(username, email)) {
             JOptionPane.showMessageDialog(view, "Username or Email already exists!", "Error",
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        // Save user to file
+        // Persist new user
         if (User.saveUser(username, email, password)) {
             JOptionPane.showMessageDialog(view, "Registration successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
             showLoginCard();
@@ -213,6 +239,9 @@ public class AuthenticationController {
         }
     }
 
+    /**
+     * Resets the user's password if the identity email exists in the records.
+     */
     private void performForgotPassword() {
         String email = view.getEmailTextField6().getText().trim();
         String newPass = new String(view.getNewPasswordPasswordField().getPassword());
@@ -222,7 +251,7 @@ public class AuthenticationController {
             return;
         }
 
-        // Check if user exists and update password
+        // Update database file
         if (User.updatePassword(email, newPass)) {
             JOptionPane.showMessageDialog(view, "Password reset successful!", "Success",
                     JOptionPane.INFORMATION_MESSAGE);
@@ -232,6 +261,9 @@ public class AuthenticationController {
         }
     }
 
+    /**
+     * Resets all input fields in the authentication frame.
+     */
     private void clearFields() {
         // Clear login fields
         view.getEmailTextField4().setText("");
@@ -249,7 +281,11 @@ public class AuthenticationController {
         view.getConfirmPasswordPasswordField1().setText("");
     }
 
+    /**
+     * Sets up Enter key listeners for smooth form navigation and submission.
+     */
     private void setupEnterKeyNavigation() {
+        // Login flow navigation
         view.getEmailTextField4().addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
@@ -266,7 +302,7 @@ public class AuthenticationController {
             }
         });
 
-        // SignUp card - Enter key navigation
+        // SignUp flow navigation
         view.getUsernameTextField().addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
@@ -299,7 +335,7 @@ public class AuthenticationController {
             }
         });
 
-        // Forgot Password card - Enter key navigation
+        // Forgot Password flow navigation
         view.getEmailTextField6().addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {

@@ -7,7 +7,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * User class handles user registration and authentication using file storage
+ * User class handles user registration, authentication, and profile management.
+ * It uses simple file storage (users.txt) to persist user data.
  */
 @SuppressWarnings("unused")
 public class User {
@@ -17,13 +18,15 @@ public class User {
     private LocalDate registrationDate;
     private String status; // "Active" or "Blocked"
 
+    /** Path to the user database file */
     private static final String USER_FILE = "src/MovieBooking/users.txt";
 
     /**
-     *
-     * @param username
-     * @param email
-     * @param password
+     * Constructs a new User (usually for registration).
+     * 
+     * @param username Unique display name
+     * @param email    Email identifier
+     * @param password Account password
      */
     public User(String username, String email, String password) {
         this.username = username;
@@ -33,10 +36,16 @@ public class User {
         this.status = "Active";
     }
 
+    /**
+     * Constructs a User with a specific registration date.
+     */
     public User(String username, String email, String password, LocalDate registrationDate) {
         this(username, email, password, registrationDate, "Active");
     }
 
+    /**
+     * Full constructor for User objects.
+     */
     public User(String username, String email, String password, LocalDate registrationDate, String status) {
         this.username = username;
         this.email = email;
@@ -45,12 +54,19 @@ public class User {
         this.status = status;
     }
 
-    // Save user to file
+    /**
+     * Saves a new user to the text file.
+     * 
+     * @param username User's chosen username
+     * @param email    User's email
+     * @param password User's password
+     * @return true if save was successful
+     */
     public static boolean saveUser(String username, String email, String password) {
         try (FileWriter writer = new FileWriter(USER_FILE, true)) {
             LocalDate registrationDate = LocalDate.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            // Format: username,email,password,date,status
+            // CSV Format: username,email,password,date,status
             writer.write(
                     username + "," + email + "," + password + "," + registrationDate.format(formatter) + ",Active\n");
             return true;
@@ -59,7 +75,13 @@ public class User {
         }
     }
 
-    // Check if user exists and password matches
+    /**
+     * Authenticates a user by checking credentials against the file.
+     * 
+     * @param identifier Username or Email
+     * @param password   Password to verify
+     * @return true if credentials are valid
+     */
     public static boolean authenticateUser(String identifier, String password) {
         try (BufferedReader reader = new BufferedReader(new FileReader(USER_FILE))) {
             String line;
@@ -83,10 +105,10 @@ public class User {
     }
 
     /**
-     * Checks if a user is blocked.
+     * Checks if a user is currently blocked by an administrator.
      * 
      * @param identifier Username or Email
-     * @return true if blocked
+     * @return true if the user's status is "Blocked"
      */
     public static boolean isUserBlocked(String identifier) {
         try (BufferedReader reader = new BufferedReader(new FileReader(USER_FILE))) {
@@ -110,7 +132,13 @@ public class User {
         return false;
     }
 
-    // Update user password in file
+    /**
+     * Updates the password for a user identified by email.
+     * 
+     * @param email       User's email
+     * @param newPassword The new password to set
+     * @return true if update was successful
+     */
     public static boolean updatePassword(String email, String newPassword) {
         List<String> lines = new ArrayList<>();
         boolean found = false;
@@ -140,6 +168,9 @@ public class User {
         return false;
     }
 
+    /**
+     * Checks if a username or email is already taken.
+     */
     public static boolean userExists(String username, String email) {
         try (BufferedReader reader = new BufferedReader(new FileReader(USER_FILE))) {
             String line;
@@ -157,6 +188,12 @@ public class User {
         return false;
     }
 
+    /**
+     * Retreives a full User object from the file.
+     * 
+     * @param identifier Username or Email
+     * @return User object found, or null
+     */
     public static User getUserDetails(String identifier) {
         try (BufferedReader reader = new BufferedReader(new FileReader(USER_FILE))) {
             String line;
@@ -173,6 +210,7 @@ public class User {
                             try {
                                 date = LocalDate.parse(parts[3], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                             } catch (Exception e) {
+                                // Fallback to current date if parse fails
                             }
                         }
                         String status = parts.length > 4 ? parts[4] : "Active";
@@ -186,6 +224,9 @@ public class User {
         return null;
     }
 
+    /**
+     * Updates user profile information.
+     */
     public static boolean updateUser(String oldEmail, String newUsername, String newEmail, String newPassword) {
         List<String> lines = new ArrayList<>();
         boolean found = false;
@@ -213,6 +254,9 @@ public class User {
         return false;
     }
 
+    /**
+     * Updates the block/active status of a user.
+     */
     public static boolean updateStatus(String email, String newStatus) {
         List<String> lines = new ArrayList<>();
         boolean found = false;
@@ -242,6 +286,9 @@ public class User {
         return false;
     }
 
+    /**
+     * Deletes a user record from the file.
+     */
     public static boolean deleteUser(String emailToDelete) {
         List<String> lines = new ArrayList<>();
         boolean found = false;
@@ -253,7 +300,7 @@ public class User {
                 if (parts.length >= 2) {
                     if (parts[1].equals(emailToDelete)) {
                         found = true;
-                        continue; // Skip this line
+                        continue; // Skip this line to "delete" it
                     }
                     lines.add(line);
                 }
@@ -268,6 +315,9 @@ public class User {
         return false;
     }
 
+    /**
+     * Internal helper to write multiple lines back to the user file.
+     */
     private static boolean writeLines(List<String> lines) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(USER_FILE))) {
             for (String l : lines) {
@@ -281,7 +331,11 @@ public class User {
         }
     }
 
-    // Get all users from the file
+    /**
+     * Retrieves all users currently registered in the system.
+     * 
+     * @return List of all User objects
+     */
     public static List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(USER_FILE))) {
@@ -297,6 +351,7 @@ public class User {
                         try {
                             date = LocalDate.parse(parts[3], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                         } catch (Exception e) {
+                            // Fallback for malformed dates
                         }
                     }
                     String status = parts.length > 4 ? parts[4] : "Active";
@@ -309,22 +364,29 @@ public class User {
         return users;
     }
 
+    // --- Getters ---
+
+    /** @return Username string */
     public String getUsername() {
         return username;
     }
 
+    /** @return User email */
     public String getEmail() {
         return email;
     }
 
+    /** @return Plain-text password (use with caution) */
     public String getPassword() {
         return password;
     }
 
+    /** @return Date the user registered */
     public LocalDate getRegistrationDate() {
         return registrationDate;
     }
 
+    /** @return "Active" or "Blocked" */
     public String getStatus() {
         return status;
     }
