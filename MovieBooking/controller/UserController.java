@@ -3,20 +3,26 @@ package MovieBooking.controller;
 import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
+import MovieBooking.model.User;
 import MovieBooking.view.MovieBookingView;
 import MovieBooking.view.AuthenticationView;
 
 public class UserController {
     private MovieBookingView view;
     private javax.swing.JButton activeButton;
+    private String loggedInUserIdentifier;
 
-    public UserController(MovieBookingView view) {
+    public UserController(MovieBookingView view, String loggedInUserIdentifier) {
         this.view = view;
+        this.loggedInUserIdentifier = loggedInUserIdentifier;
         java.awt.CardLayout cl = (java.awt.CardLayout) view.getContentPane().getLayout();
         cl.show(view.getContentPane(), "card3");
-        
+
         initUserController();
+        updateWelcomeBar();
         showUserHome();
     }
 
@@ -131,6 +137,39 @@ public class UserController {
             btn.setForeground(new java.awt.Color(255, 255, 255));
         }
         activeButton = buttons[0];
+    }
+
+    private void updateWelcomeBar() {
+        // Get user details
+        User user = User.getUserDetails(loggedInUserIdentifier);
+        
+        if (user != null) {
+            // Update home page welcome bar
+            view.getWelcomeLabel().setText("Welcome " + user.getUsername());
+            view.getEmailLabel().setText(user.getEmail());
+            
+            // Update today's date
+            LocalDate today = LocalDate.now();
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMMM dd, yyyy");
+            view.getDateLabel().setText("Today's Date: " + today.format(dateFormatter));
+            
+            // Update member since date
+            if (user.getRegistrationDate() != null) {
+                view.getMemberSinceLabel().setText("Member Since: " + user.getRegistrationDate().format(dateFormatter));
+            } else {
+                view.getMemberSinceLabel().setText("Member Since: " + today.format(dateFormatter));
+            }
+            
+            // Update profile page welcome bar (if it exists)
+            view.getProfileWelcomeLabel().setText("Welcome " + user.getUsername());
+            view.getProfileEmailLabel().setText(user.getEmail());
+            view.getProfileDateLabel().setText("Today's Date: " + today.format(dateFormatter));
+            if (user.getRegistrationDate() != null) {
+                view.getProfileMemberSinceLabel().setText("Member Since: " + user.getRegistrationDate().format(dateFormatter));
+            } else {
+                view.getProfileMemberSinceLabel().setText("Member Since: " + today.format(dateFormatter));
+            }
+        }
     }
 
     private void performLogout() {

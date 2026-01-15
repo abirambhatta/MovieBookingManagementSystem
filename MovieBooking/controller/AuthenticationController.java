@@ -161,7 +161,7 @@ public class AuthenticationController {
                     JOptionPane.INFORMATION_MESSAGE);
             view.dispose();
             MovieBookingView movieBookingView = new MovieBookingView();
-            new UserController(movieBookingView);
+            new UserController(movieBookingView, identifier);
             movieBookingView.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(view, "Invalid credentials!", "Login Failed", JOptionPane.ERROR_MESSAGE);

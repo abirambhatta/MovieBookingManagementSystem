@@ -1429,14 +1429,14 @@
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Group type="102" attributes="0">
-                                          <Component id="LogoIconAdmin1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="LogoIconUser" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="jLabel3" min="-2" pref="98" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="MoviesButton1" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
-                                      <Component id="UsersButton1" min="-2" pref="150" max="-2" attributes="0"/>
-                                      <Component id="UsersButton2" min="-2" pref="150" max="-2" attributes="0"/>
-                                      <Component id="jButton6" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="BrowseMovies" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                                      <Component id="MyBooking" min="-2" pref="150" max="-2" attributes="0"/>
+                                      <Component id="ProfileButton" min="-2" pref="150" max="-2" attributes="0"/>
+                                      <Component id="LogoutButton" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="jScrollPane1" min="-2" pref="695" max="-2" attributes="0"/>
@@ -1453,18 +1453,18 @@
                           <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="LogoIconAdmin1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="LogoIconUser" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                           <Component id="HomeButton1" min="-2" pref="40" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="MoviesButton1" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="BrowseMovies" min="-2" pref="40" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="UsersButton1" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="MyBooking" min="-2" pref="40" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="UsersButton2" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="ProfileButton" min="-2" pref="40" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-                          <Component id="jButton6" min="-2" pref="34" max="-2" attributes="0"/>
+                          <Component id="LogoutButton" min="-2" pref="34" max="-2" attributes="0"/>
                           <EmptySpace pref="221" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -1884,7 +1884,7 @@
                     </Container>
                   </SubComponents>
                 </Container>
-                <Component class="javax.swing.JLabel" name="LogoIconAdmin1">
+                <Component class="javax.swing.JLabel" name="LogoIconUser">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="14" style="0"/>
@@ -1920,7 +1920,7 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="HomeButton1ActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="MoviesButton1">
+                <Component class="javax.swing.JButton" name="BrowseMovies">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="1"/>
@@ -1938,7 +1938,7 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="UsersButton1">
+                <Component class="javax.swing.JButton" name="MyBooking">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="1"/>
@@ -1956,10 +1956,10 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UsersButton1ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MyBookingActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton6">
+                <Component class="javax.swing.JButton" name="LogoutButton">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="33" green="33" red="33" type="rgb"/>
@@ -1989,7 +1989,7 @@
                     <Property name="text" type="java.lang.String" value="MovieMint"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="UsersButton2">
+                <Component class="javax.swing.JButton" name="ProfileButton">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="1"/>
@@ -2008,7 +2008,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UsersButton2ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ProfileButtonActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -2058,13 +2058,13 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="LogoIconAdmin2" min="-2" max="-2" attributes="0"/>
+                                          <Component id="LogoIconUser2" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="jLabel24" min="-2" pref="98" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="BrowseMovies2" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                                      <Component id="BrowseMoviesButton2" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                                       <Component id="MyBookingButton2" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
-                                      <Component id="UsersButton4" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                                      <Component id="ProfileButton2" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                                       <Component id="LogoutButton2" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -2082,16 +2082,16 @@
                           <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel24" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="LogoIconAdmin2" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="LogoIconUser2" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                           <Component id="HomeButton2" min="-2" pref="40" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="BrowseMovies2" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="BrowseMoviesButton2" min="-2" pref="40" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="MyBookingButton2" min="-2" pref="40" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="UsersButton4" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="ProfileButton2" min="-2" pref="40" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                           <Component id="LogoutButton2" min="-2" pref="34" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
@@ -2961,7 +2961,7 @@
                     </Container>
                   </SubComponents>
                 </Container>
-                <Component class="javax.swing.JLabel" name="LogoIconAdmin2">
+                <Component class="javax.swing.JLabel" name="LogoIconUser2">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="14" style="0"/>
@@ -2993,7 +2993,7 @@
                     <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="HomeButton2MouseExited"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="BrowseMovies2">
+                <Component class="javax.swing.JButton" name="BrowseMoviesButton2">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="14" green="9" red="e5" type="rgb"/>
@@ -3065,7 +3065,7 @@
                     <Property name="text" type="java.lang.String" value="MovieMint"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="UsersButton4">
+                <Component class="javax.swing.JButton" name="ProfileButton2">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="1"/>
@@ -3084,7 +3084,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UsersButton4ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ProfileButton2ActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -3138,10 +3138,10 @@
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="jLabel43" min="-2" pref="98" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="MoviesButton3" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
-                                      <Component id="UsersButton5" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
-                                      <Component id="UsersButton6" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
-                                      <Component id="jButton8" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="BrowseMoviesButton3" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                                      <Component id="MyBookingButton3" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                                      <Component id="ProfileButton3" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                                      <Component id="LogoutButton3" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="jScrollPane6" min="-2" pref="695" max="-2" attributes="0"/>
@@ -3163,13 +3163,13 @@
                           <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                           <Component id="HomeButton3" min="-2" pref="40" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="MoviesButton3" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="BrowseMoviesButton3" min="-2" pref="40" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="UsersButton5" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="MyBookingButton3" min="-2" pref="40" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="UsersButton6" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="ProfileButton3" min="-2" pref="40" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-                          <Component id="jButton8" min="-2" pref="34" max="-2" attributes="0"/>
+                          <Component id="LogoutButton3" min="-2" pref="34" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -3198,24 +3198,51 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="RecentBooking2" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jScrollPane7" min="-2" pref="581" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                                          <Component id="RecentBooking2" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="160" max="-2" attributes="0"/>
+                                          <Component id="jButton7" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
+                                          <Component id="jButton11" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="160" max="-2" attributes="0"/>
+                                          <Component id="SearchBarForMyBooking" min="-2" pref="285" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                          <Component id="SearchButtonForMyBooking" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                                          <Component id="jScrollPane7" min="-2" pref="581" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
-                                  <EmptySpace pref="112" max="32767" attributes="0"/>
+                                  <EmptySpace pref="101" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                                   <Component id="RecentBooking2" min="-2" pref="31" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jScrollPane7" min="-2" pref="107" max="-2" attributes="0"/>
-                                  <EmptySpace pref="903" max="32767" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="SearchBarForMyBooking" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="SearchButtonForMyBooking" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
+                                  <Component id="jScrollPane7" min="-2" pref="207" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jButton11" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jButton7" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace pref="597" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -3259,6 +3286,55 @@
                             </Component>
                           </SubComponents>
                         </Container>
+                        <Component class="javax.swing.JButton" name="jButton7">
+                          <Properties>
+                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="0" green="99" red="66" type="rgb"/>
+                            </Property>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="1"/>
+                            </Property>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="View Ticket"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="jButton11">
+                          <Properties>
+                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="0" green="99" red="66" type="rgb"/>
+                            </Property>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="1"/>
+                            </Property>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="View Ticket"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="SearchBarForMyBooking">
+                          <Properties>
+                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="SearchButtonForMyBooking">
+                          <Properties>
+                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="14" green="9" red="e5" type="rgb"/>
+                            </Property>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Segoe UI" size="12" style="1"/>
+                            </Property>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Search"/>
+                          </Properties>
+                        </Component>
                       </SubComponents>
                     </Container>
                   </SubComponents>
@@ -3295,7 +3371,7 @@
                     <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="HomeButton3MouseExited"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="MoviesButton3">
+                <Component class="javax.swing.JButton" name="BrowseMoviesButton3">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="1"/>
@@ -3313,7 +3389,7 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="UsersButton5">
+                <Component class="javax.swing.JButton" name="MyBookingButton3">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="14" green="9" red="e5" type="rgb"/>
@@ -3334,10 +3410,10 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UsersButton5ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MyBookingButton3ActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton8">
+                <Component class="javax.swing.JButton" name="LogoutButton3">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="33" green="33" red="33" type="rgb"/>
@@ -3367,7 +3443,7 @@
                     <Property name="text" type="java.lang.String" value="MovieMint"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="UsersButton6">
+                <Component class="javax.swing.JButton" name="ProfileButton3">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="1"/>
@@ -3386,7 +3462,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UsersButton6ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ProfileButton3ActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -3440,10 +3516,10 @@
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="jLabel54" min="-2" pref="98" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="MoviesButton4" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
-                                      <Component id="UsersButton7" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                                      <Component id="BrowseMoviesButton4" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                                      <Component id="MyBookingButton4" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                                       <Component id="profileButton4" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
-                                      <Component id="jButton9" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="LogOutButton4" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="jScrollPane8" min="-2" pref="695" max="-2" attributes="0"/>
@@ -3465,13 +3541,13 @@
                           <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                           <Component id="HomeButton4" min="-2" pref="40" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="MoviesButton4" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="BrowseMoviesButton4" min="-2" pref="40" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="UsersButton7" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="MyBookingButton4" min="-2" pref="40" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="profileButton4" min="-2" pref="40" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-                          <Component id="jButton9" min="-2" pref="34" max="-2" attributes="0"/>
+                          <Component id="LogOutButton4" min="-2" pref="34" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -3919,7 +3995,7 @@
                     <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="HomeButton4MouseExited"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="MoviesButton4">
+                <Component class="javax.swing.JButton" name="BrowseMoviesButton4">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="1"/>
@@ -3937,7 +4013,7 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="UsersButton7">
+                <Component class="javax.swing.JButton" name="MyBookingButton4">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="1"/>
@@ -3955,10 +4031,10 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UsersButton7ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MyBookingButton4ActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton9">
+                <Component class="javax.swing.JButton" name="LogOutButton4">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="33" green="33" red="33" type="rgb"/>

@@ -3,6 +3,8 @@ package MovieBooking.model;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * User class handles user registration and authentication using file storage
@@ -12,7 +14,8 @@ public class User {
     private String username;
     private String email;
     private String password;
-    
+    private LocalDate registrationDate;
+
     private static final String USER_FILE = "src/MovieBooking/users.txt";
     
     /**
@@ -25,6 +28,14 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.registrationDate = LocalDate.now();
+    }
+    
+    public User(String username, String email, String password, LocalDate registrationDate) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.registrationDate = registrationDate;
     }
     
     // Save user to file
@@ -38,7 +49,9 @@ public class User {
      */
     public static boolean saveUser(String username, String email, String password) {
         try (FileWriter writer = new FileWriter(USER_FILE, true)) {
-            writer.write(username + "," + email + "," + password + "\n");
+            LocalDate registrationDate = LocalDate.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            writer.write(username + "," + email + "," + password + "," + registrationDate.format(formatter) + "\n");
             return true;
         } catch (IOException e) {
             return false;
@@ -59,11 +72,19 @@ public class User {
             while ((line = reader.readLine()) != null) {
                 int firstComma = line.indexOf(',');
                 int secondComma = line.indexOf(',', firstComma + 1);
+                int thirdComma = line.indexOf(',', secondComma + 1);
                 
                 if (firstComma != -1 && secondComma != -1) {
                     String username = line.substring(0, firstComma);
                     String email = line.substring(firstComma + 1, secondComma);
-                    String userPassword = line.substring(secondComma + 1);
+                    String userPassword;
+                    
+                    // Handle both old format (username,email,password) and new format (username,email,password,date)
+                    if (thirdComma != -1) {
+                        userPassword = line.substring(secondComma + 1, thirdComma);
+                    } else {
+                        userPassword = line.substring(secondComma + 1);
+                    }
                     
                     if ((identifier.equals(username) || identifier.equals(email)) 
                         && password.equals(userPassword)) {
@@ -95,14 +116,20 @@ public class User {
             while ((line = reader.readLine()) != null) {
                 int firstComma = line.indexOf(',');
                 int secondComma = line.indexOf(',', firstComma + 1);
+                int thirdComma = line.indexOf(',', secondComma + 1);
                 
                 if (firstComma != -1 && secondComma != -1) {
                     String username = line.substring(0, firstComma);
                     String userEmail = line.substring(firstComma + 1, secondComma);
                     
                     if (userEmail.equals(email)) {
-                        // Update password for this user
-                        users.add(username + "," + userEmail + "," + newPassword);
+                        // Update password for this user, preserve registration date if exists
+                        if (thirdComma != -1) {
+                            String registrationDate = line.substring(thirdComma + 1);
+                            users.add(username + "," + userEmail + "," + newPassword + "," + registrationDate);
+                        } else {
+                            users.add(username + "," + userEmail + "," + newPassword);
+                        }
                         userFound = true;
                     } else {
                         users.add(line);
@@ -144,11 +171,11 @@ public class User {
             while ((line = reader.readLine()) != null) {
                 int firstComma = line.indexOf(',');
                 int secondComma = line.indexOf(',', firstComma + 1);
-                
+
                 if (firstComma != -1 && secondComma != -1) {
                     String fileUsername = line.substring(0, firstComma);
                     String fileEmail = line.substring(firstComma + 1, secondComma);
-                    
+
                     if (fileUsername.equals(username) || fileEmail.equals(email)) {
                         return true;
                     }
@@ -158,5 +185,69 @@ public class User {
             return false;
         }
         return false;
+    }
+
+    // Get user details by identifier (username or email)
+
+    /**
+     *
+     * @param identifier
+     * @return
+     */
+    public static User getUserDetails(String identifier) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(USER_FILE))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                int firstComma = line.indexOf(',');
+                int secondComma = line.indexOf(',', firstComma + 1);
+                int thirdComma = line.indexOf(',', secondComma + 1);
+
+                if (firstComma != -1 && secondComma != -1) {
+                    String username = line.substring(0, firstComma);
+                    String email = line.substring(firstComma + 1, secondComma);
+                    String password;
+                    LocalDate registrationDate = null;
+                    
+                    // Handle both old format (username,email,password) and new format (username,email,password,date)
+                    if (thirdComma != -1) {
+                        password = line.substring(secondComma + 1, thirdComma);
+                        String dateStr = line.substring(thirdComma + 1).trim();
+                        try {
+                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                            registrationDate = LocalDate.parse(dateStr, formatter);
+                        } catch (Exception e) {
+                            registrationDate = LocalDate.now(); // Default to today if parsing fails
+                        }
+                    } else {
+                        password = line.substring(secondComma + 1);
+                        registrationDate = LocalDate.now(); // Default to today for old format
+                    }
+
+                    if (identifier.equals(username) || identifier.equals(email)) {
+                        return new User(username, email, password, registrationDate);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            return null;
+        }
+        return null;
+    }
+
+    // Getters
+    public String getUsername() {
+        return username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public LocalDate getRegistrationDate() {
+        return registrationDate;
     }
 }

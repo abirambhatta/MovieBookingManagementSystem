@@ -154,13 +154,13 @@ public class MovieBookingView extends javax.swing.JFrame {
         RecentBooking = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        LogoIconAdmin1 = new javax.swing.JLabel();
+        LogoIconUser = new javax.swing.JLabel();
         HomeButton1 = new javax.swing.JButton();
-        MoviesButton1 = new javax.swing.JButton();
-        UsersButton1 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        BrowseMovies = new javax.swing.JButton();
+        MyBooking = new javax.swing.JButton();
+        LogoutButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        UsersButton2 = new javax.swing.JButton();
+        ProfileButton = new javax.swing.JButton();
         UserBrowseMoviesPage = new javax.swing.JPanel();
         NavBarBrowse = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -209,13 +209,13 @@ public class MovieBookingView extends javax.swing.JFrame {
         Book4 = new javax.swing.JButton();
         jLabel71 = new javax.swing.JLabel();
         MoviePoster4 = new javax.swing.JPanel();
-        LogoIconAdmin2 = new javax.swing.JLabel();
+        LogoIconUser2 = new javax.swing.JLabel();
         HomeButton2 = new javax.swing.JButton();
-        BrowseMovies2 = new javax.swing.JButton();
+        BrowseMoviesButton2 = new javax.swing.JButton();
         MyBookingButton2 = new javax.swing.JButton();
         LogoutButton2 = new javax.swing.JButton();
         jLabel24 = new javax.swing.JLabel();
-        UsersButton4 = new javax.swing.JButton();
+        ProfileButton2 = new javax.swing.JButton();
         UserMyBookingPage = new javax.swing.JPanel();
         NavBarMyBooking = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
@@ -223,13 +223,17 @@ public class MovieBookingView extends javax.swing.JFrame {
         RecentBooking2 = new javax.swing.JLabel();
         jScrollPane7 = new javax.swing.JScrollPane();
         jTable4 = new javax.swing.JTable();
+        jButton7 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
+        SearchBarForMyBooking = new javax.swing.JTextField();
+        SearchButtonForMyBooking = new javax.swing.JButton();
         LogoIconAdmin3 = new javax.swing.JLabel();
         HomeButton3 = new javax.swing.JButton();
-        MoviesButton3 = new javax.swing.JButton();
-        UsersButton5 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        BrowseMoviesButton3 = new javax.swing.JButton();
+        MyBookingButton3 = new javax.swing.JButton();
+        LogoutButton3 = new javax.swing.JButton();
         jLabel43 = new javax.swing.JLabel();
-        UsersButton6 = new javax.swing.JButton();
+        ProfileButton3 = new javax.swing.JButton();
         UserProfilePage = new javax.swing.JPanel();
         NavBarProfile = new javax.swing.JPanel();
         jScrollPane8 = new javax.swing.JScrollPane();
@@ -253,9 +257,9 @@ public class MovieBookingView extends javax.swing.JFrame {
         jTable5 = new javax.swing.JTable();
         LogoIconAdmin4 = new javax.swing.JLabel();
         HomeButton4 = new javax.swing.JButton();
-        MoviesButton4 = new javax.swing.JButton();
-        UsersButton7 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
+        BrowseMoviesButton4 = new javax.swing.JButton();
+        MyBookingButton4 = new javax.swing.JButton();
+        LogOutButton4 = new javax.swing.JButton();
         jLabel54 = new javax.swing.JLabel();
         profileButton4 = new javax.swing.JButton();
 
@@ -1217,8 +1221,8 @@ public class MovieBookingView extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(HomePageElements);
 
-        LogoIconAdmin1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        LogoIconAdmin1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MovieBooking/logo.png"))); // NOI18N
+        LogoIconUser.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        LogoIconUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MovieBooking/logo.png"))); // NOI18N
 
         HomeButton1.setBackground(new java.awt.Color(229, 9, 20));
         HomeButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -1241,45 +1245,45 @@ public class MovieBookingView extends javax.swing.JFrame {
             }
         });
 
-        MoviesButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        MoviesButton1.setForeground(new java.awt.Color(0, 0, 0));
-        MoviesButton1.setText("Browse Movies");
-        MoviesButton1.setBorder(null);
-        MoviesButton1.setContentAreaFilled(false);
-        MoviesButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BrowseMovies.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        BrowseMovies.setForeground(new java.awt.Color(0, 0, 0));
+        BrowseMovies.setText("Browse Movies");
+        BrowseMovies.setBorder(null);
+        BrowseMovies.setContentAreaFilled(false);
+        BrowseMovies.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        UsersButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        UsersButton1.setForeground(new java.awt.Color(0, 0, 0));
-        UsersButton1.setText("My Booking");
-        UsersButton1.setBorder(null);
-        UsersButton1.setContentAreaFilled(false);
-        UsersButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        UsersButton1.addActionListener(new java.awt.event.ActionListener() {
+        MyBooking.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        MyBooking.setForeground(new java.awt.Color(0, 0, 0));
+        MyBooking.setText("My Booking");
+        MyBooking.setBorder(null);
+        MyBooking.setContentAreaFilled(false);
+        MyBooking.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        MyBooking.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UsersButton1ActionPerformed(evt);
+                MyBookingActionPerformed(evt);
             }
         });
 
-        jButton6.setBackground(new java.awt.Color(51, 51, 51));
-        jButton6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jButton6.setText("LogOut");
-        jButton6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        LogoutButton.setBackground(new java.awt.Color(51, 51, 51));
+        LogoutButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        LogoutButton.setForeground(new java.awt.Color(255, 255, 255));
+        LogoutButton.setText("LogOut");
+        LogoutButton.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         jLabel3.setFont(new java.awt.Font("Segoe Print", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(229, 9, 20));
         jLabel3.setText("MovieMint");
 
-        UsersButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        UsersButton2.setForeground(new java.awt.Color(0, 0, 0));
-        UsersButton2.setText("Profile");
-        UsersButton2.setToolTipText("");
-        UsersButton2.setBorder(null);
-        UsersButton2.setContentAreaFilled(false);
-        UsersButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        UsersButton2.addActionListener(new java.awt.event.ActionListener() {
+        ProfileButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        ProfileButton.setForeground(new java.awt.Color(0, 0, 0));
+        ProfileButton.setText("Profile");
+        ProfileButton.setToolTipText("");
+        ProfileButton.setBorder(null);
+        ProfileButton.setContentAreaFilled(false);
+        ProfileButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ProfileButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UsersButton2ActionPerformed(evt);
+                ProfileButtonActionPerformed(evt);
             }
         });
 
@@ -1296,13 +1300,13 @@ public class MovieBookingView extends javax.swing.JFrame {
                     .addGroup(NavBarHomeLayout.createSequentialGroup()
                         .addGroup(NavBarHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(NavBarHomeLayout.createSequentialGroup()
-                                .addComponent(LogoIconAdmin1)
+                                .addComponent(LogoIconUser)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(MoviesButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(UsersButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(UsersButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(BrowseMovies, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(MyBooking, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ProfileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LogoutButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 695, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -1314,17 +1318,17 @@ public class MovieBookingView extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(NavBarHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(LogoIconAdmin1))
+                    .addComponent(LogoIconUser))
                 .addGap(42, 42, 42)
                 .addComponent(HomeButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(MoviesButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BrowseMovies, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(UsersButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(MyBooking, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(UsersButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ProfileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(49, 49, 49)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(LogoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(221, Short.MAX_VALUE))
         );
 
@@ -1827,8 +1831,8 @@ public class MovieBookingView extends javax.swing.JFrame {
 
         jScrollPane4.setViewportView(jPanel7);
 
-        LogoIconAdmin2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        LogoIconAdmin2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MovieBooking/logo.png"))); // NOI18N
+        LogoIconUser2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        LogoIconUser2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MovieBooking/logo.png"))); // NOI18N
 
         HomeButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         HomeButton2.setForeground(new java.awt.Color(0, 0, 0));
@@ -1845,13 +1849,13 @@ public class MovieBookingView extends javax.swing.JFrame {
             }
         });
 
-        BrowseMovies2.setBackground(new java.awt.Color(229, 9, 20));
-        BrowseMovies2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        BrowseMovies2.setForeground(new java.awt.Color(0, 0, 0));
-        BrowseMovies2.setText("Browse Movies");
-        BrowseMovies2.setBorder(null);
-        BrowseMovies2.setContentAreaFilled(false);
-        BrowseMovies2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BrowseMoviesButton2.setBackground(new java.awt.Color(229, 9, 20));
+        BrowseMoviesButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        BrowseMoviesButton2.setForeground(new java.awt.Color(0, 0, 0));
+        BrowseMoviesButton2.setText("Browse Movies");
+        BrowseMoviesButton2.setBorder(null);
+        BrowseMoviesButton2.setContentAreaFilled(false);
+        BrowseMoviesButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         MyBookingButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         MyBookingButton2.setForeground(new java.awt.Color(0, 0, 0));
@@ -1875,16 +1879,16 @@ public class MovieBookingView extends javax.swing.JFrame {
         jLabel24.setForeground(new java.awt.Color(229, 9, 20));
         jLabel24.setText("MovieMint");
 
-        UsersButton4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        UsersButton4.setForeground(new java.awt.Color(0, 0, 0));
-        UsersButton4.setText("Profile");
-        UsersButton4.setToolTipText("");
-        UsersButton4.setBorder(null);
-        UsersButton4.setContentAreaFilled(false);
-        UsersButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        UsersButton4.addActionListener(new java.awt.event.ActionListener() {
+        ProfileButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        ProfileButton2.setForeground(new java.awt.Color(0, 0, 0));
+        ProfileButton2.setText("Profile");
+        ProfileButton2.setToolTipText("");
+        ProfileButton2.setBorder(null);
+        ProfileButton2.setContentAreaFilled(false);
+        ProfileButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ProfileButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UsersButton4ActionPerformed(evt);
+                ProfileButton2ActionPerformed(evt);
             }
         });
 
@@ -1901,12 +1905,12 @@ public class MovieBookingView extends javax.swing.JFrame {
                     .addGroup(NavBarBrowseLayout.createSequentialGroup()
                         .addGroup(NavBarBrowseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(NavBarBrowseLayout.createSequentialGroup()
-                                .addComponent(LogoIconAdmin2)
+                                .addComponent(LogoIconUser2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(BrowseMovies2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BrowseMoviesButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(MyBookingButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(UsersButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ProfileButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(LogoutButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 695, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1919,15 +1923,15 @@ public class MovieBookingView extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(NavBarBrowseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel24)
-                    .addComponent(LogoIconAdmin2))
+                    .addComponent(LogoIconUser2))
                 .addGap(42, 42, 42)
                 .addComponent(HomeButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(BrowseMovies2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BrowseMoviesButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(MyBookingButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(UsersButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ProfileButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(49, 49, 49)
                 .addComponent(LogoutButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1974,25 +1978,63 @@ public class MovieBookingView extends javax.swing.JFrame {
         ));
         jScrollPane7.setViewportView(jTable4);
 
+        jButton7.setBackground(new java.awt.Color(102, 153, 0));
+        jButton7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton7.setForeground(new java.awt.Color(255, 255, 255));
+        jButton7.setText("View Ticket");
+
+        jButton11.setBackground(new java.awt.Color(102, 153, 0));
+        jButton11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton11.setForeground(new java.awt.Color(255, 255, 255));
+        jButton11.setText("View Ticket");
+
+        SearchBarForMyBooking.setBackground(new java.awt.Color(255, 255, 255));
+
+        SearchButtonForMyBooking.setBackground(new java.awt.Color(229, 9, 20));
+        SearchButtonForMyBooking.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        SearchButtonForMyBooking.setForeground(new java.awt.Color(255, 255, 255));
+        SearchButtonForMyBooking.setText("Search");
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(RecentBooking2)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(112, Short.MAX_VALUE))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(RecentBooking2))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(160, 160, 160)
+                        .addComponent(jButton7)
+                        .addGap(89, 89, 89)
+                        .addComponent(jButton11))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(160, 160, 160)
+                        .addComponent(SearchBarForMyBooking, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(SearchButtonForMyBooking))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(44, 44, 44)
                 .addComponent(RecentBooking2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(903, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(SearchBarForMyBooking, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SearchButtonForMyBooking))
+                .addGap(92, 92, 92)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton11)
+                    .addComponent(jButton7))
+                .addContainerGap(597, Short.MAX_VALUE))
         );
 
         jScrollPane6.setViewportView(jPanel8);
@@ -2015,46 +2057,46 @@ public class MovieBookingView extends javax.swing.JFrame {
             }
         });
 
-        MoviesButton3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        MoviesButton3.setForeground(new java.awt.Color(0, 0, 0));
-        MoviesButton3.setText("Browse Movies");
-        MoviesButton3.setBorder(null);
-        MoviesButton3.setContentAreaFilled(false);
-        MoviesButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BrowseMoviesButton3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        BrowseMoviesButton3.setForeground(new java.awt.Color(0, 0, 0));
+        BrowseMoviesButton3.setText("Browse Movies");
+        BrowseMoviesButton3.setBorder(null);
+        BrowseMoviesButton3.setContentAreaFilled(false);
+        BrowseMoviesButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        UsersButton5.setBackground(new java.awt.Color(229, 9, 20));
-        UsersButton5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        UsersButton5.setForeground(new java.awt.Color(0, 0, 0));
-        UsersButton5.setText("My Booking");
-        UsersButton5.setBorder(null);
-        UsersButton5.setContentAreaFilled(false);
-        UsersButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        UsersButton5.addActionListener(new java.awt.event.ActionListener() {
+        MyBookingButton3.setBackground(new java.awt.Color(229, 9, 20));
+        MyBookingButton3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        MyBookingButton3.setForeground(new java.awt.Color(0, 0, 0));
+        MyBookingButton3.setText("My Booking");
+        MyBookingButton3.setBorder(null);
+        MyBookingButton3.setContentAreaFilled(false);
+        MyBookingButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        MyBookingButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UsersButton5ActionPerformed(evt);
+                MyBookingButton3ActionPerformed(evt);
             }
         });
 
-        jButton8.setBackground(new java.awt.Color(51, 51, 51));
-        jButton8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton8.setForeground(new java.awt.Color(255, 255, 255));
-        jButton8.setText("LogOut");
-        jButton8.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        LogoutButton3.setBackground(new java.awt.Color(51, 51, 51));
+        LogoutButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        LogoutButton3.setForeground(new java.awt.Color(255, 255, 255));
+        LogoutButton3.setText("LogOut");
+        LogoutButton3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         jLabel43.setFont(new java.awt.Font("Segoe Print", 1, 18)); // NOI18N
         jLabel43.setForeground(new java.awt.Color(229, 9, 20));
         jLabel43.setText("MovieMint");
 
-        UsersButton6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        UsersButton6.setForeground(new java.awt.Color(0, 0, 0));
-        UsersButton6.setText("Profile");
-        UsersButton6.setToolTipText("");
-        UsersButton6.setBorder(null);
-        UsersButton6.setContentAreaFilled(false);
-        UsersButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        UsersButton6.addActionListener(new java.awt.event.ActionListener() {
+        ProfileButton3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        ProfileButton3.setForeground(new java.awt.Color(0, 0, 0));
+        ProfileButton3.setText("Profile");
+        ProfileButton3.setToolTipText("");
+        ProfileButton3.setBorder(null);
+        ProfileButton3.setContentAreaFilled(false);
+        ProfileButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ProfileButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UsersButton6ActionPerformed(evt);
+                ProfileButton3ActionPerformed(evt);
             }
         });
 
@@ -2074,10 +2116,10 @@ public class MovieBookingView extends javax.swing.JFrame {
                                 .addComponent(LogoIconAdmin3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(MoviesButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(UsersButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(UsersButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(BrowseMoviesButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(MyBookingButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ProfileButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LogoutButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 695, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -2093,13 +2135,13 @@ public class MovieBookingView extends javax.swing.JFrame {
                 .addGap(42, 42, 42)
                 .addComponent(HomeButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(MoviesButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BrowseMoviesButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(UsersButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(MyBookingButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(UsersButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ProfileButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(49, 49, 49)
-                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(LogoutButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -2361,30 +2403,30 @@ public class MovieBookingView extends javax.swing.JFrame {
             }
         });
 
-        MoviesButton4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        MoviesButton4.setForeground(new java.awt.Color(0, 0, 0));
-        MoviesButton4.setText("Browse Movies");
-        MoviesButton4.setBorder(null);
-        MoviesButton4.setContentAreaFilled(false);
-        MoviesButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BrowseMoviesButton4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        BrowseMoviesButton4.setForeground(new java.awt.Color(0, 0, 0));
+        BrowseMoviesButton4.setText("Browse Movies");
+        BrowseMoviesButton4.setBorder(null);
+        BrowseMoviesButton4.setContentAreaFilled(false);
+        BrowseMoviesButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        UsersButton7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        UsersButton7.setForeground(new java.awt.Color(0, 0, 0));
-        UsersButton7.setText("My Booking");
-        UsersButton7.setBorder(null);
-        UsersButton7.setContentAreaFilled(false);
-        UsersButton7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        UsersButton7.addActionListener(new java.awt.event.ActionListener() {
+        MyBookingButton4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        MyBookingButton4.setForeground(new java.awt.Color(0, 0, 0));
+        MyBookingButton4.setText("My Booking");
+        MyBookingButton4.setBorder(null);
+        MyBookingButton4.setContentAreaFilled(false);
+        MyBookingButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        MyBookingButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UsersButton7ActionPerformed(evt);
+                MyBookingButton4ActionPerformed(evt);
             }
         });
 
-        jButton9.setBackground(new java.awt.Color(51, 51, 51));
-        jButton9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton9.setForeground(new java.awt.Color(255, 255, 255));
-        jButton9.setText("LogOut");
-        jButton9.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        LogOutButton4.setBackground(new java.awt.Color(51, 51, 51));
+        LogOutButton4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        LogOutButton4.setForeground(new java.awt.Color(255, 255, 255));
+        LogOutButton4.setText("LogOut");
+        LogOutButton4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         jLabel54.setFont(new java.awt.Font("Segoe Print", 1, 18)); // NOI18N
         jLabel54.setForeground(new java.awt.Color(229, 9, 20));
@@ -2420,10 +2462,10 @@ public class MovieBookingView extends javax.swing.JFrame {
                                 .addComponent(LogoIconAdmin4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel54, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(MoviesButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(UsersButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BrowseMoviesButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(MyBookingButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(profileButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(LogOutButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 695, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -2439,13 +2481,13 @@ public class MovieBookingView extends javax.swing.JFrame {
                 .addGap(42, 42, 42)
                 .addComponent(HomeButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(MoviesButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BrowseMoviesButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(UsersButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(MyBookingButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(profileButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(49, 49, 49)
-                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(LogOutButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -2481,13 +2523,13 @@ public class MovieBookingView extends javax.swing.JFrame {
         HomeButton1.setText("Home");
     }//GEN-LAST:event_HomeButton1MouseExited
 
-    private void UsersButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsersButton1ActionPerformed
+    private void MyBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MyBookingActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_UsersButton1ActionPerformed
+    }//GEN-LAST:event_MyBookingActionPerformed
 
-    private void UsersButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsersButton2ActionPerformed
+    private void ProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProfileButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_UsersButton2ActionPerformed
+    }//GEN-LAST:event_ProfileButtonActionPerformed
 
     private void HomeButton2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeButton2MouseEntered
         // TODO add your handling code here:
@@ -2501,9 +2543,9 @@ public class MovieBookingView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_MyBookingButton2ActionPerformed
 
-    private void UsersButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsersButton4ActionPerformed
+    private void ProfileButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProfileButton2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_UsersButton4ActionPerformed
+    }//GEN-LAST:event_ProfileButton2ActionPerformed
 
     private void HomeButton3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeButton3MouseEntered
         // TODO add your handling code here:
@@ -2513,13 +2555,13 @@ public class MovieBookingView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_HomeButton3MouseExited
 
-    private void UsersButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsersButton5ActionPerformed
+    private void MyBookingButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MyBookingButton3ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_UsersButton5ActionPerformed
+    }//GEN-LAST:event_MyBookingButton3ActionPerformed
 
-    private void UsersButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsersButton6ActionPerformed
+    private void ProfileButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProfileButton3ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_UsersButton6ActionPerformed
+    }//GEN-LAST:event_ProfileButton3ActionPerformed
 
     private void HomeButton4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeButton4MouseEntered
         // TODO add your handling code here:
@@ -2529,9 +2571,9 @@ public class MovieBookingView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_HomeButton4MouseExited
 
-    private void UsersButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsersButton7ActionPerformed
+    private void MyBookingButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MyBookingButton4ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_UsersButton7ActionPerformed
+    }//GEN-LAST:event_MyBookingButton4ActionPerformed
 
     private void profileButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileButton4ActionPerformed
         // TODO add your handling code here:
@@ -2582,39 +2624,39 @@ public class MovieBookingView extends javax.swing.JFrame {
     }//GEN-LAST:event_HomeButtonActionPerformed
 
     private void MoviesButton1MouseEntered(java.awt.event.MouseEvent evt) {
-        MoviesButton1.setForeground(new java.awt.Color(229, 9, 20));
+        BrowseMovies.setForeground(new java.awt.Color(229, 9, 20));
     }
 
     private void MoviesButton1MouseExited(java.awt.event.MouseEvent evt) {
-        if (MoviesButton1.getForeground().equals(java.awt.Color.WHITE)) return;
-        MoviesButton1.setForeground(new java.awt.Color(0, 0, 0));
+        if (BrowseMovies.getForeground().equals(java.awt.Color.WHITE)) return;
+        BrowseMovies.setForeground(new java.awt.Color(0, 0, 0));
     }
 
     private void MoviesButton2MouseEntered(java.awt.event.MouseEvent evt) {
-        BrowseMovies2.setForeground(new java.awt.Color(229, 9, 20));
+        BrowseMoviesButton2.setForeground(new java.awt.Color(229, 9, 20));
     }
 
     private void MoviesButton2MouseExited(java.awt.event.MouseEvent evt) {
-        if (BrowseMovies2.getForeground().equals(java.awt.Color.WHITE)) return;
-        BrowseMovies2.setForeground(new java.awt.Color(0, 0, 0));
+        if (BrowseMoviesButton2.getForeground().equals(java.awt.Color.WHITE)) return;
+        BrowseMoviesButton2.setForeground(new java.awt.Color(0, 0, 0));
     }
 
     private void MoviesButton3MouseEntered(java.awt.event.MouseEvent evt) {
-        MoviesButton3.setForeground(new java.awt.Color(229, 9, 20));
+        BrowseMoviesButton3.setForeground(new java.awt.Color(229, 9, 20));
     }
 
     private void MoviesButton3MouseExited(java.awt.event.MouseEvent evt) {
-        if (MoviesButton3.getForeground().equals(java.awt.Color.WHITE)) return;
-        MoviesButton3.setForeground(new java.awt.Color(0, 0, 0));
+        if (BrowseMoviesButton3.getForeground().equals(java.awt.Color.WHITE)) return;
+        BrowseMoviesButton3.setForeground(new java.awt.Color(0, 0, 0));
     }
 
     private void MoviesButton4MouseEntered(java.awt.event.MouseEvent evt) {
-        MoviesButton4.setForeground(new java.awt.Color(229, 9, 20));
+        BrowseMoviesButton4.setForeground(new java.awt.Color(229, 9, 20));
     }
 
     private void MoviesButton4MouseExited(java.awt.event.MouseEvent evt) {
-        if (MoviesButton4.getForeground().equals(java.awt.Color.WHITE)) return;
-        MoviesButton4.setForeground(new java.awt.Color(0, 0, 0));
+        if (BrowseMoviesButton4.getForeground().equals(java.awt.Color.WHITE)) return;
+        BrowseMoviesButton4.setForeground(new java.awt.Color(0, 0, 0));
     }
 
     private void HomeButtonMouseExited(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_HomeButtonMouseExited
@@ -2677,36 +2719,36 @@ public class MovieBookingView extends javax.swing.JFrame {
         }
         // Browse Movies button
         if (page.equals("browse")) {
-            MoviesButton1.setText("<html><u>Browse Movies</u></html>");
-            MoviesButton1.setOpaque(true);
-            MoviesButton1.setBackground(new java.awt.Color(229, 9, 20));
-            MoviesButton1.setForeground(java.awt.Color.WHITE);
+            BrowseMovies.setText("<html><u>Browse Movies</u></html>");
+            BrowseMovies.setOpaque(true);
+            BrowseMovies.setBackground(new java.awt.Color(229, 9, 20));
+            BrowseMovies.setForeground(java.awt.Color.WHITE);
         } else {
-            MoviesButton1.setText("Browse Movies");
-            MoviesButton1.setOpaque(false);
-            MoviesButton1.setForeground(java.awt.Color.BLACK);
+            BrowseMovies.setText("Browse Movies");
+            BrowseMovies.setOpaque(false);
+            BrowseMovies.setForeground(java.awt.Color.BLACK);
         }
         // My Booking button
         if (page.equals("booking")) {
-            UsersButton1.setText("<html><u>My Booking</u></html>");
-            UsersButton1.setOpaque(true);
-            UsersButton1.setBackground(new java.awt.Color(229, 9, 20));
-            UsersButton1.setForeground(java.awt.Color.WHITE);
+            MyBooking.setText("<html><u>My Booking</u></html>");
+            MyBooking.setOpaque(true);
+            MyBooking.setBackground(new java.awt.Color(229, 9, 20));
+            MyBooking.setForeground(java.awt.Color.WHITE);
         } else {
-            UsersButton1.setText("My Booking");
-            UsersButton1.setOpaque(false);
-            UsersButton1.setForeground(java.awt.Color.BLACK);
+            MyBooking.setText("My Booking");
+            MyBooking.setOpaque(false);
+            MyBooking.setForeground(java.awt.Color.BLACK);
         }
         // Profile button
         if (page.equals("profile")) {
-            UsersButton2.setText("<html><u>Profile</u></html>");
-            UsersButton2.setOpaque(true);
-            UsersButton2.setBackground(new java.awt.Color(229, 9, 20));
-            UsersButton2.setForeground(java.awt.Color.WHITE);
+            ProfileButton.setText("<html><u>Profile</u></html>");
+            ProfileButton.setOpaque(true);
+            ProfileButton.setBackground(new java.awt.Color(229, 9, 20));
+            ProfileButton.setForeground(java.awt.Color.WHITE);
         } else {
-            UsersButton2.setText("Profile");
-            UsersButton2.setOpaque(false);
-            UsersButton2.setForeground(java.awt.Color.BLACK);
+            ProfileButton.setText("Profile");
+            ProfileButton.setOpaque(false);
+            ProfileButton.setForeground(java.awt.Color.BLACK);
         }
     }
 
@@ -2840,19 +2882,19 @@ public class MovieBookingView extends javax.swing.JFrame {
     }
 
     public javax.swing.JButton getMoviesButton1() {
-        return MoviesButton1;
+        return BrowseMovies;
     }
 
     public javax.swing.JButton getUsersButton1() {
-        return UsersButton1;
+        return MyBooking;
     }
 
     public javax.swing.JButton getUsersButton2() {
-        return UsersButton2;
+        return ProfileButton;
     }
 
     public javax.swing.JButton getLogoutButton1() {
-        return jButton6;
+        return LogoutButton;
     }
 
     public javax.swing.JButton getHomeButton2() {
@@ -2860,7 +2902,7 @@ public class MovieBookingView extends javax.swing.JFrame {
     }
 
     public javax.swing.JButton getMoviesButton2() {
-        return BrowseMovies2;
+        return BrowseMoviesButton2;
     }
 
     public javax.swing.JButton getUsersButton3() {
@@ -2868,7 +2910,7 @@ public class MovieBookingView extends javax.swing.JFrame {
     }
 
     public javax.swing.JButton getUsersButton4() {
-        return UsersButton4;
+        return ProfileButton2;
     }
 
     public javax.swing.JButton getLogoutButton2() {
@@ -2880,19 +2922,19 @@ public class MovieBookingView extends javax.swing.JFrame {
     }
 
     public javax.swing.JButton getMoviesButton3() {
-        return MoviesButton3;
+        return BrowseMoviesButton3;
     }
 
     public javax.swing.JButton getUsersButton5() {
-        return UsersButton5;
+        return MyBookingButton3;
     }
 
     public javax.swing.JButton getUsersButton6() {
-        return UsersButton6;
+        return ProfileButton3;
     }
 
     public javax.swing.JButton getLogoutButton3() {
-        return jButton8;
+        return LogoutButton3;
     }
 
     public javax.swing.JButton getHomeButton4() {
@@ -2900,11 +2942,11 @@ public class MovieBookingView extends javax.swing.JFrame {
     }
 
     public javax.swing.JButton getMoviesButton4() {
-        return MoviesButton4;
+        return BrowseMoviesButton4;
     }
 
     public javax.swing.JButton getUsersButton7() {
-        return UsersButton7;
+        return MyBookingButton4;
     }
 
     public javax.swing.JButton getUsersButton8() {
@@ -2912,7 +2954,7 @@ public class MovieBookingView extends javax.swing.JFrame {
     }
 
     public javax.swing.JButton getLogoutButton4() {
-        return jButton9;
+        return LogOutButton4;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -2929,7 +2971,10 @@ public class MovieBookingView extends javax.swing.JFrame {
     private javax.swing.JButton Book4;
     private javax.swing.JPanel BookMovie;
     private javax.swing.JPanel BookMovie1;
-    private javax.swing.JButton BrowseMovies2;
+    private javax.swing.JButton BrowseMovies;
+    private javax.swing.JButton BrowseMoviesButton2;
+    private javax.swing.JButton BrowseMoviesButton3;
+    private javax.swing.JButton BrowseMoviesButton4;
     private javax.swing.JButton DeleteButton;
     private javax.swing.JComboBox<String> FilterGenre;
     private javax.swing.JComboBox<String> FilterLanguage;
@@ -2940,12 +2985,15 @@ public class MovieBookingView extends javax.swing.JFrame {
     private javax.swing.JButton HomeButton4;
     private javax.swing.JPanel HomePageElements;
     private javax.swing.JPanel ImagePosterChooser;
+    private javax.swing.JButton LogOutButton4;
     private javax.swing.JLabel LogoIconAdmin;
-    private javax.swing.JLabel LogoIconAdmin1;
-    private javax.swing.JLabel LogoIconAdmin2;
     private javax.swing.JLabel LogoIconAdmin3;
     private javax.swing.JLabel LogoIconAdmin4;
+    private javax.swing.JLabel LogoIconUser;
+    private javax.swing.JLabel LogoIconUser2;
+    private javax.swing.JButton LogoutButton;
     private javax.swing.JButton LogoutButton2;
+    private javax.swing.JButton LogoutButton3;
     private javax.swing.JPanel MovieDetail1;
     private javax.swing.JPanel MovieDetail2;
     private javax.swing.JPanel MovieDetail3;
@@ -2955,15 +3003,18 @@ public class MovieBookingView extends javax.swing.JFrame {
     private javax.swing.JPanel MoviePoster3;
     private javax.swing.JPanel MoviePoster4;
     private javax.swing.JButton MoviesButton;
-    private javax.swing.JButton MoviesButton1;
-    private javax.swing.JButton MoviesButton3;
-    private javax.swing.JButton MoviesButton4;
+    private javax.swing.JButton MyBooking;
     private javax.swing.JButton MyBookingButton2;
+    private javax.swing.JButton MyBookingButton3;
+    private javax.swing.JButton MyBookingButton4;
     private javax.swing.JPanel NavBarBrowse;
     private javax.swing.JPanel NavBarHome;
     private javax.swing.JPanel NavBarMyBooking;
     private javax.swing.JPanel NavBarProfile;
     private javax.swing.JPanel NavigationBarWithButton;
+    private javax.swing.JButton ProfileButton;
+    private javax.swing.JButton ProfileButton2;
+    private javax.swing.JButton ProfileButton3;
     private javax.swing.JLabel RecentBooking;
     private javax.swing.JLabel RecentBooking1;
     private javax.swing.JLabel RecentBooking2;
@@ -2971,7 +3022,9 @@ public class MovieBookingView extends javax.swing.JFrame {
     private javax.swing.JLabel RecentBooking4;
     private javax.swing.JLabel RecentBooking5;
     private javax.swing.JTextField SearchBar;
+    private javax.swing.JTextField SearchBarForMyBooking;
     private javax.swing.JButton SearchButton;
+    private javax.swing.JButton SearchButtonForMyBooking;
     private javax.swing.JToggleButton SeatA1;
     private javax.swing.JToggleButton SeatA2;
     private javax.swing.JToggleButton SeatA3;
@@ -3018,24 +3071,17 @@ public class MovieBookingView extends javax.swing.JFrame {
     private javax.swing.JPanel UserProfilePage;
     private javax.swing.JPanel UserpPannel;
     private javax.swing.JButton UsersButton;
-    private javax.swing.JButton UsersButton1;
-    private javax.swing.JButton UsersButton2;
-    private javax.swing.JButton UsersButton4;
-    private javax.swing.JButton UsersButton5;
-    private javax.swing.JButton UsersButton6;
-    private javax.swing.JButton UsersButton7;
     private javax.swing.JPanel WelcomeBar;
     private javax.swing.JPanel YourBookingCard;
     private javax.swing.JPanel YourBookingCard3;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
+    private javax.swing.JButton jButton7;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
@@ -3138,5 +3184,39 @@ public class MovieBookingView extends javax.swing.JFrame {
     public void showChooserPanel() {
         java.awt.CardLayout cl = (java.awt.CardLayout) jDialog1.getContentPane().getLayout();
         cl.show(jDialog1.getContentPane(), "chooser");
+    }
+
+    // Getter methods for welcome bar labels
+    public javax.swing.JLabel getWelcomeLabel() {
+        return jLabel4;
+    }
+
+    public javax.swing.JLabel getDateLabel() {
+        return jLabel5;
+    }
+
+    public javax.swing.JLabel getEmailLabel() {
+        return jLabel6;
+    }
+
+    public javax.swing.JLabel getMemberSinceLabel() {
+        return jLabel7;
+    }
+
+    // Getter methods for profile page welcome bar labels
+    public javax.swing.JLabel getProfileWelcomeLabel() {
+        return jLabel44;
+    }
+
+    public javax.swing.JLabel getProfileDateLabel() {
+        return jLabel45;
+    }
+
+    public javax.swing.JLabel getProfileEmailLabel() {
+        return jLabel46;
+    }
+
+    public javax.swing.JLabel getProfileMemberSinceLabel() {
+        return jLabel47;
     }
 }
