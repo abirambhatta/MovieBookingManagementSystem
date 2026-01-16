@@ -684,13 +684,63 @@ public class AdminController {
             return;
         }
 
-        // Filter users by username or email
-        List<User> filtered = allUsers.stream()
-                .filter(u -> u.getUsername().toLowerCase().contains(query) ||
-                        u.getEmail().toLowerCase().contains(query))
-                .collect(Collectors.toList());
+        // --- Binary Search Implementation for Coursework ---
+        // Step 1: Binary search requires a sorted list.
+        // We'll create a copy and sort it by Username using Selection Sort.
+        List<User> sortedForSearch = new ArrayList<>(allUsers);
+        int n = sortedForSearch.size();
+        for (int i = 0; i < n - 1; i++) {
+            int minIdx = i;
+            for (int j = i + 1; j < n; j++) {
+                if (sortedForSearch.get(j).getUsername()
+                        .compareToIgnoreCase(sortedForSearch.get(minIdx).getUsername()) < 0) {
+                    minIdx = j;
+                }
+            }
+            User temp = sortedForSearch.get(minIdx);
+            sortedForSearch.set(minIdx, sortedForSearch.get(i));
+            sortedForSearch.set(i, temp);
+        }
 
-        displayUserTable(filtered);
+        // Step 2: Perform Binary Search (Exact match or prefix match logic)
+        List<User> result = new ArrayList<>();
+        int low = 0;
+        int high = sortedForSearch.size() - 1;
+
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            User midUser = sortedForSearch.get(mid);
+            String midName = midUser.getUsername().toLowerCase();
+
+            if (midName.startsWith(query) || midUser.getEmail().toLowerCase().startsWith(query)) {
+                // Found a match! Since there might be multiple matches with the same prefix,
+                // we expand outwards from the found index.
+                result.add(midUser);
+
+                // Search left
+                int left = mid - 1;
+                while (left >= 0 && (sortedForSearch.get(left).getUsername().toLowerCase().startsWith(query) ||
+                        sortedForSearch.get(left).getEmail().toLowerCase().startsWith(query))) {
+                    result.add(sortedForSearch.get(left));
+                    left--;
+                }
+                // Search right
+                int right = mid + 1;
+                while (right < sortedForSearch.size()
+                        && (sortedForSearch.get(right).getUsername().toLowerCase().startsWith(query) ||
+                                sortedForSearch.get(right).getEmail().toLowerCase().startsWith(query))) {
+                    result.add(sortedForSearch.get(right));
+                    right++;
+                }
+                break;
+            } else if (midName.compareTo(query) < 0) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+
+        displayUserTable(result);
     }
 
     /**
